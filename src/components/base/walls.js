@@ -4,10 +4,10 @@ import { wallCoordinates, sideWallCoordinates, backWallCoordinates } from './con
 const textureLoader = new THREE.TextureLoader();
 
 // wall
-const wallColorTexture = textureLoader.load('./textures/walls/black_painted_planks_diff_1k.jpg');
-const wallARMTexture = textureLoader.load('/textures/walls/black_painted_planks_arm_1k.jpg');
-const wallNormalTexture = textureLoader.load('./textures/walls/black_painted_planks_nor_gl_1k.jpg');
-const wallDisplacementTexture = textureLoader.load('./textures/walls/black_painted_planks_disp_1k.jpg');
+const wallColorTexture = textureLoader.load('./textures/walls/diff_1k.jpg');
+const wallARMTexture = textureLoader.load('/textures/walls/arm_1k.jpg');
+const wallNormalTexture = textureLoader.load('./textures/walls/nor_gl_1k.jpg');
+const wallDisplacementTexture = textureLoader.load('./textures/walls/disp_1k.jpg');
 
 wallColorTexture.colorSpace = THREE.SRGBColorSpace;
 
