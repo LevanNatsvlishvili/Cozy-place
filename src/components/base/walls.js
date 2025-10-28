@@ -11,8 +11,8 @@ const wallDisplacementTexture = textureLoader.load('./textures/walls/disp_1k.jpg
 
 wallColorTexture.colorSpace = THREE.SRGBColorSpace;
 
-const repeatX = 3,
-  repeatY = 5;
+const repeatX = 1.25,
+  repeatY = 1;
 const rotation = Math.PI * 0.5;
 
 for (const t of [wallColorTexture, wallARMTexture, wallNormalTexture, wallDisplacementTexture]) {
