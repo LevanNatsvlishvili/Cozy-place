@@ -1,6 +1,6 @@
 export const floorCoordinates = {
-  width: 7,
-  length: 10,
+  width: 10,
+  length: 12,
 };
 export const wallCoordinates = {
   width: floorCoordinates.length,
@@ -15,7 +15,13 @@ export const sideWallCoordinates = {
 };
 
 export const windowCoordinates = {
-  width: 7,
+  width: floorCoordinates.width,
   height: 6,
   z: -0,
+};
+
+export const backWallCoordinates = {
+  z: floorCoordinates.length,
+  width: floorCoordinates.width,
+  height: wallCoordinates.height,
 };

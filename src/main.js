@@ -5,6 +5,7 @@ import walls from './components/base/walls';
 import floor from './components/base/floor';
 import windowResizer from './utils/windowResizer';
 import { camera, renderer, controls } from './utils/renderer.js';
+import { windowCoordinates } from './components/base/consts/common.js';
 
 /**
  * Base
@@ -15,11 +16,33 @@ const gui = new GUI();
 // Scene
 const scene = new THREE.Scene();
 
-const sizes = {
-  width: window.innerWidth,
-  height: window.innerHeight,
-};
+// Ambient light
+const ambientLight = new THREE.AmbientLight('#fff', 1);
+scene.add(ambientLight);
+gui.add(ambientLight, 'intensity').min(0).max(1).step(0.01).name('Ambient Light Intensity');
+gui.add(ambientLight.position, 'x').min(-10).max(10).step(0.01).name('Ambient Light X');
+gui.add(ambientLight.position, 'y').min(-10).max(10).step(0.01).name('Ambient Light Y');
+gui.add(ambientLight.position, 'z').min(-10).max(10).step(0.01).name('Ambient Light Z');
 
+// Directional light
+const directionalLight = new THREE.DirectionalLight('#fff', 1);
+directionalLight.position.set(3, 2, -8);
+
+gui.add(directionalLight.position, 'x').min(-10).max(10).step(0.01).name('Light X');
+gui.add(directionalLight.position, 'y').min(-10).max(10).step(0.01).name('Light Y');
+gui.add(directionalLight.position, 'z').min(-10).max(10).step(0.01).name('Light Z');
+
+// Light optimization
+// directionalLight.shadow.mapSize.width = 256;
+// directionalLight.shadow.mapSize.height = 256;
+// directionalLight.shadow.camera.top = 8;
+// directionalLight.shadow.camera.right = 8;
+// directionalLight.shadow.camera.bottom = -8;
+// directionalLight.shadow.camera.left = -8;
+// directionalLight.shadow.camera.near = 1;
+// directionalLight.shadow.camera.far = 15;
+
+scene.add(directionalLight);
 // Camera
 scene.add(camera);
 
@@ -27,11 +50,6 @@ scene.add(camera);
 windowResizer(camera, renderer);
 // Controls
 
-const windowCoordinates = {
-  width: 7,
-  height: 6,
-  z: -0,
-};
 const windowModel = new THREE.Mesh(
   new THREE.PlaneGeometry(windowCoordinates.width, windowCoordinates.height),
   new THREE.MeshBasicMaterial({ color: 'blue', side: THREE.DoubleSide })
