@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import { wallCoordinates, sideWallCoordinates, backWallCoordinates } from './consts/common.js';
-
-const textureLoader = new THREE.TextureLoader();
+import { textureLoader } from '@/utils/loadingManager.js';
 
 // wall
 const wallColorTexture = textureLoader.load('./textures/walls/diff_1k.jpg');
@@ -11,8 +10,8 @@ const wallDisplacementTexture = textureLoader.load('./textures/walls/disp_1k.jpg
 
 wallColorTexture.colorSpace = THREE.SRGBColorSpace;
 
-const repeatX = 1.25,
-  repeatY = 1;
+const repeatX = 1.25;
+const repeatY = 1;
 const rotation = Math.PI * 0.5;
 
 for (const t of [wallColorTexture, wallARMTexture, wallNormalTexture, wallDisplacementTexture]) {
@@ -34,6 +33,9 @@ const wallMaterial = new THREE.MeshStandardMaterial({
   displacementMap: wallDisplacementTexture,
   displacementScale: 0.025, // start small; increase if you add more segments
 });
+
+wallMaterial.transparent = true;
+wallMaterial.opacity = 0; // to fix some z-fighting issues with floor
 
 const sideWallGeom = new THREE.BoxGeometry(
   wallCoordinates.width, // along X
