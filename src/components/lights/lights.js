@@ -1,13 +1,11 @@
 import * as THREE from 'three';
-import GUI from 'lil-gui';
-
-const gui = new GUI();
+import gui from '@/utils/gui.js';
 
 // Ambient light
 export const ambientLight = new THREE.AmbientLight('#fff', 10);
 ambientLight.raycast = true;
 ambientLight.wireframe = true;
-ambientLight.add(new THREE.AxesHelper(2));
+// ambientLight.add(new THREE.AxesHelper(2));
 
 gui.add(ambientLight, 'intensity').min(0).max(1).step(0.01).name('Ambient Light Intensity');
 gui.add(ambientLight.position, 'x').min(-10).max(10).step(0.01).name('Ambient Light X');

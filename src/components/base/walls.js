@@ -1,6 +1,8 @@
 import * as THREE from 'three';
-import { wallCoordinates, sideWallCoordinates, backWallCoordinates } from './consts/common.js';
+import { wallCoordinates, sideWallCoordinates, backWallCoordinates, floorCoordinates } from './consts/common.js';
 import { textureLoader } from '@/utils/loadingManager.js';
+import gui from '@/utils/gui.js';
+import floor from './floor.js';
 
 // wall
 const wallColorTexture = textureLoader.load('./textures/walls/diff_1k.jpg');
@@ -35,7 +37,7 @@ const wallMaterial = new THREE.MeshStandardMaterial({
 });
 
 wallMaterial.transparent = true;
-wallMaterial.opacity = 0; // to fix some z-fighting issues with floor
+// wallMaterial.opacity = 0; // to fix some z-fighting issues with floor
 
 const sideWallGeom = new THREE.BoxGeometry(
   wallCoordinates.width, // along X
@@ -63,9 +65,32 @@ sideWalls2.position.x = sideWallCoordinates.x2;
 sideWalls2.position.y = sideWallCoordinates.y;
 sideWalls2.rotation.y = Math.PI * 0.5;
 
+// Bent side walls
+const bentSideWallGeometry = new THREE.BoxGeometry(
+  floorCoordinates.length, // along X
+  floorCoordinates.width / 2 + floorCoordinates.width / 5, // along Y
+  0.1, // thin
+  1,
+  64,
+  1 // widthSegments, heightSegments, depthSegments
+);
+bentSideWallGeometry.setAttribute('uv2', new THREE.BufferAttribute(bentSideWallGeometry.attributes.uv.array, 2));
+const bentSideWall = new THREE.Mesh(bentSideWallGeometry, wallMaterial);
+bentSideWall.rotation.y = Math.PI * 0.5;
+bentSideWall.rotateOnAxis(new THREE.Vector3(1, 0, 0), Math.PI * -0.25);
+
+bentSideWall.position.x = sideWallCoordinates.x1 - floorCoordinates.width / 4;
+bentSideWall.position.z = sideWallCoordinates.z;
+bentSideWall.position.y = sideWallCoordinates.y + wallCoordinates.height + 0.5;
+const bentSideWall1 = bentSideWall.clone();
+const bentSideWall2 = bentSideWall.clone();
+bentSideWall2.rotateOnAxis(new THREE.Vector3(1, 0, 0), Math.PI * 0.5);
+bentSideWall2.position.x = sideWallCoordinates.x2 + floorCoordinates.width / 4;
+
+// BACK WALL //
 const backWallGeom = new THREE.BoxGeometry(
   backWallCoordinates.width,
-  backWallCoordinates.height,
+  backWallCoordinates.height * 2.5,
   0.1, // thin
   1,
   64,
@@ -74,15 +99,14 @@ const backWallGeom = new THREE.BoxGeometry(
 backWallGeom.setAttribute('uv2', new THREE.BufferAttribute(backWallGeom.attributes.uv.array, 2));
 
 const backWall = new THREE.Mesh(backWallGeom, wallMaterial);
-// Point to backwall
-
-backWall.wireframe = true;
 backWall.position.z = backWallCoordinates.z;
-backWall.position.y = wallCoordinates.height / 2;
+backWall.position.y = wallCoordinates.height;
 
 const group = new THREE.Group();
 group.add(sideWalls1);
 group.add(sideWalls2);
+group.add(bentSideWall1);
+group.add(bentSideWall2);
 group.add(backWall);
 
 export default group;
