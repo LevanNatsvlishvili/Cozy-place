@@ -81,7 +81,7 @@ bentSideWall.rotateOnAxis(new THREE.Vector3(1, 0, 0), Math.PI * -0.25);
 
 bentSideWall.position.x = sideWallCoordinates.x1 - floorCoordinates.width / 4;
 bentSideWall.position.z = sideWallCoordinates.z;
-bentSideWall.position.y = sideWallCoordinates.y + wallCoordinates.height + 0.5;
+bentSideWall.position.y = sideWallCoordinates.y + wallCoordinates.height - 0.5;
 const bentSideWall1 = bentSideWall.clone();
 const bentSideWall2 = bentSideWall.clone();
 bentSideWall2.rotateOnAxis(new THREE.Vector3(1, 0, 0), Math.PI * 0.5);
@@ -90,7 +90,7 @@ bentSideWall2.position.x = sideWallCoordinates.x2 + floorCoordinates.width / 4;
 // BACK WALL //
 const backWallGeom = new THREE.BoxGeometry(
   backWallCoordinates.width,
-  backWallCoordinates.height * 2.5,
+  backWallCoordinates.height,
   0.1, // thin
   1,
   64,
@@ -100,13 +100,18 @@ backWallGeom.setAttribute('uv2', new THREE.BufferAttribute(backWallGeom.attribut
 
 const backWall = new THREE.Mesh(backWallGeom, wallMaterial);
 backWall.position.z = backWallCoordinates.z;
-backWall.position.y = wallCoordinates.height;
+
+const backWall1 = backWall.clone();
+const backWall2 = backWall.clone();
+backWall1.position.y = wallCoordinates.height / 2;
+backWall2.position.y = wallCoordinates.height / 2 + wallCoordinates.height;
 
 const group = new THREE.Group();
 group.add(sideWalls1);
 group.add(sideWalls2);
 group.add(bentSideWall1);
 group.add(bentSideWall2);
-group.add(backWall);
+group.add(backWall1);
+group.add(backWall2);
 
 export default group;
