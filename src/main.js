@@ -6,6 +6,7 @@ import floor from './components/base/floor';
 import windowResizer from './utils/windowResizer';
 import { camera, renderer, controls } from './utils/renderer.js';
 import { windowCoordinates } from './components/base/consts/common.js';
+import { ambientLight, directionalLight } from './components/lights/lights.js';
 
 /**
  * Base
@@ -17,36 +18,10 @@ const gui = new GUI();
 const scene = new THREE.Scene();
 scene.add(new THREE.AxesHelper(5));
 
-// Ambient light
-const ambientLight = new THREE.AmbientLight('#fff', 10);
-ambientLight.raycast = true;
-ambientLight.wireframe = true;
-ambientLight.add(new THREE.AxesHelper(2));
+// Lights
 scene.add(ambientLight);
-gui.add(ambientLight, 'intensity').min(0).max(1).step(0.01).name('Ambient Light Intensity');
-gui.add(ambientLight.position, 'x').min(-10).max(10).step(0.01).name('Ambient Light X');
-gui.add(ambientLight.position, 'y').min(-10).max(10).step(0.01).name('Ambient Light Y');
-gui.add(ambientLight.position, 'z').min(-10).max(10).step(0.01).name('Ambient Light Z');
-
-// Directional light
-const directionalLight = new THREE.DirectionalLight('#fff', 1);
-directionalLight.position.set(3, 2, -8);
-
-gui.add(directionalLight.position, 'x').min(-10).max(10).step(0.01).name('Light X');
-gui.add(directionalLight.position, 'y').min(-10).max(10).step(0.01).name('Light Y');
-gui.add(directionalLight.position, 'z').min(-10).max(10).step(0.01).name('Light Z');
-
-// Light optimization
-// directionalLight.shadow.mapSize.width = 256;
-// directionalLight.shadow.mapSize.height = 256;
-// directionalLight.shadow.camera.top = 8;
-// directionalLight.shadow.camera.right = 8;
-// directionalLight.shadow.camera.bottom = -8;
-// directionalLight.shadow.camera.left = -8;
-// directionalLight.shadow.camera.near = 1;
-// directionalLight.shadow.camera.far = 15;
-
 scene.add(directionalLight);
+
 // Camera
 scene.add(camera);
 
