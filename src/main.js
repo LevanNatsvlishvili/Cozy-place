@@ -46,8 +46,10 @@ scene.add(table);
 // gui.add(table.position, 'x').min(-5).max(5).step(0.01).name('Table Position X');
 // gui.add(table.rotation, 'y').min(-Math.PI).max(Math.PI).step(0.01).name('Table Rotation Y');
 
-hearth(scene);
-sofa(scene);
+const hearthModel = await hearth();
+const sofaModel = await sofa();
+scene.add(hearthModel);
+scene.add(sofaModel);
 // gui.add(chair.position, 'y').min(-2).max(2).step(0.01).name('Chair Position Y');
 // gui.add(chair.position, 'x').min(-5).max(5).step(0.01).name('Chair Position X');
 // gui.add(chair.position, 'z').min(-5).max(5).step(0.01).name('Chair Position Z');
