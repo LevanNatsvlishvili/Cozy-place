@@ -18,9 +18,9 @@ const sofa = (scene) => {
     gui.add(model.rotation, 'y').min(-Math.PI).max(Math.PI).step(0.01).name('Sofa Rotation Y');
 
     // When the model is loaded, set loading to true
-    setTimeout(() => {
-      loading.model2 = true;
-    }, []);
+    // setTimeout(() => {
+    //   loading.model2 = true;
+    // }, []);
     scene.add(model);
   });
 };

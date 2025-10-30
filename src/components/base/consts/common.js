@@ -4,7 +4,7 @@ export const floorCoordinates = {
 };
 export const wallCoordinates = {
   width: floorCoordinates.length,
-  height: 4,
+  height: 5.75,
 };
 
 export const sideWallCoordinates = {

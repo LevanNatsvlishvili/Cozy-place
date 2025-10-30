@@ -6,6 +6,7 @@ import { camera, renderer, controls } from './utils/renderer.js';
 import { windowCoordinates } from './components/base/consts/common.js';
 import { ambientLight, directionalLight } from './components/lights/lights.js';
 import sofa from '@/components/models/sofa';
+import hearth from './components/models/hearth';
 
 /**
  * Base
@@ -27,6 +28,7 @@ scene.add(camera);
 windowResizer(camera, renderer);
 // Controls
 
+// Models
 const windowModel = new THREE.Mesh(
   new THREE.PlaneGeometry(windowCoordinates.width, windowCoordinates.height),
   new THREE.MeshBasicMaterial({ color: 'blue', side: THREE.DoubleSide })
@@ -44,16 +46,7 @@ scene.add(table);
 // gui.add(table.position, 'x').min(-5).max(5).step(0.01).name('Table Position X');
 // gui.add(table.rotation, 'y').min(-Math.PI).max(Math.PI).step(0.01).name('Table Rotation Y');
 
-const fireplace = new THREE.Mesh(new THREE.BoxGeometry(1.5, 1.5, 1.5), new THREE.MeshBasicMaterial({ color: 'red' }));
-fireplace.position.set(-2.5, -1, 0.5);
-scene.add(fireplace);
-// gui.add(fireplace.position, 'y').min(-2).max(2).step(0.01).name('Fireplace Position Y');
-// gui.add(fireplace.position, 'x').min(-5).max(5).step(0.01).name('Fireplace Position X');
-// gui.add(fireplace.rotation, 'y').min(-Math.PI).max(Math.PI).step(0.01).name('Fireplace Rotation Y');
-
-const chair = new THREE.Mesh(new THREE.BoxGeometry(1.5, 1, 2.5), new THREE.MeshBasicMaterial({ color: 'pink' }));
-chair.position.set(2.5, -1, 1);
-scene.add(chair);
+hearth(scene);
 sofa(scene);
 // gui.add(chair.position, 'y').min(-2).max(2).step(0.01).name('Chair Position Y');
 // gui.add(chair.position, 'x').min(-5).max(5).step(0.01).name('Chair Position X');

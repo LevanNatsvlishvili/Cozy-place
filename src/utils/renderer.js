@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { screenSizes } from './windowResizer';
+import gui from './gui';
 
 export const canvas = document.querySelector('canvas.webgl');
 
