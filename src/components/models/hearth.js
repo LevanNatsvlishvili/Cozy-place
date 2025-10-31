@@ -12,26 +12,24 @@ const props = {
 
 const hearth = async () => {
   const group = new THREE.Group();
+
+  // Hearth model
   const glb = await gltfLoader.loadAsync('./models/hearth.glb');
-  // Fireplace model
   const model = glb.scene;
   model.position.x = -4.5;
   model.position.z = 3;
   model.position.y = 2.85;
   model.rotateOnAxis(new THREE.Vector3(0, 1, 0), Math.PI * 0.5);
   model.scale.set(props.scale.x, props.scale.y, props.scale.z);
-
   group.add(model);
-  // return model;
 
   // Fire Animation
-  // Slow down video
   const video = document.createElement('video');
   video.src = '/fire.mp4';
   video.loop = true;
   video.muted = true;
   video.play();
-  video.playbackRate = 0.6;
+  video.playbackRate = 0.65;
 
   const fireTexture = new THREE.VideoTexture(video);
   fireTexture.encoding = THREE.sRGBEncoding;

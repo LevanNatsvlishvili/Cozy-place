@@ -7,6 +7,7 @@ import { windowCoordinates } from './components/base/consts/common.js';
 import { ambientLight, directionalLight } from './components/lights/lights.js';
 import sofa from '@/components/models/sofa';
 import hearth from './components/models/hearth';
+import table from './components/models/table';
 
 /**
  * Base
@@ -39,17 +40,13 @@ windowModel.material.opacity = 0.4;
 windowModel.material.transparent = true;
 scene.add(windowModel);
 
-const table = new THREE.Mesh(new THREE.BoxGeometry(1.25, 0.5, 1.75), new THREE.MeshBasicMaterial({ color: 'brown' }));
-table.position.set(-2, -1, 4);
-scene.add(table);
-// gui.add(table.position, 'y').min(-2).max(2).step(0.01).name('Table Position Y');
-// gui.add(table.position, 'x').min(-5).max(5).step(0.01).name('Table Position X');
-// gui.add(table.rotation, 'y').min(-Math.PI).max(Math.PI).step(0.01).name('Table Rotation Y');
-
+// Models
 const hearthModel = await hearth();
 const sofaModel = await sofa();
+const tableModel = await table();
 scene.add(hearthModel);
 scene.add(sofaModel);
+scene.add(tableModel);
 // gui.add(chair.position, 'y').min(-2).max(2).step(0.01).name('Chair Position Y');
 // gui.add(chair.position, 'x').min(-5).max(5).step(0.01).name('Chair Position X');
 // gui.add(chair.position, 'z').min(-5).max(5).step(0.01).name('Chair Position Z');
