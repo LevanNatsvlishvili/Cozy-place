@@ -26,7 +26,7 @@ for (const t of [floorColorTexture, floorARMTexture, floorNormalTexture, floorDi
 }
 
 const material = new THREE.MeshStandardMaterial({
-  // color: '#2F3A3B',
+  color: 0x8b4513,
   map: floorColorTexture,
   normalMap: floorNormalTexture,
   displacementMap: floorDisplacementTexture,

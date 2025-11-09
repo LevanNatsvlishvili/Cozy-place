@@ -23,9 +23,6 @@ const table = async () => {
       child.material.metalness = 0.1;
       child.material.roughness = 1;
       child.material.needsUpdate = true;
-      gui.add(child.material, 'metalness').min(0).max(1).step(0.01).name('Table Metalness');
-      gui.add(child.material, 'roughness').min(0).max(1).step(0.01).name('Table Roughness');
-      gui.addColor(child.material, 'color').name('Table Color');
     }
   });
 
@@ -35,14 +32,6 @@ const table = async () => {
   model.rotateY(Math.PI / -2);
 
   model.scale.set(props.scale, props.scale, props.scale);
-  gui.add(model.position, 'x').min(-10).max(10).step(0.01).name('Table Position X');
-  gui.add(model.position, 'y').min(-10).max(10).step(0.01).name('Table Position Y');
-  gui.add(model.position, 'z').min(-10).max(10).step(0.01).name('Table Position Z');
-  gui.add(model.rotation, 'y').min(-Math.PI).max(Math.PI).step(0.01).name('Table Rotation Y');
-  gui.add(model.scale, 'x').min(0).max(2).step(0.01).name('Table Scale X');
-  gui.add(model.scale, 'y').min(0).max(2).step(0.01).name('Table Scale Y');
-  gui.add(model.scale, 'z').min(0).max(2).step(0.01).name('Table Scale Z');
-
   group.add(model);
 
   const fireLight = new THREE.PointLight(0xffa733, 1.6, 4, 2); // color, intensity, distance, decay
@@ -55,16 +44,6 @@ const table = async () => {
   fireLight.intensity = 3.5;
   fireLight.decay = 2.33;
 
-  gui.add(fireLight.scale, 'x').min(0).max(2).step(0.01).name('Fire Light Scale X');
-  gui.add(fireLight.scale, 'y').min(0).max(2).step(0.01).name('Fire Light Scale Y');
-  gui.add(fireLight.scale, 'z').min(0).max(2).step(0.01).name('Fire Light Scale Z');
-
-  const AxesHelper = new THREE.AxesHelper(2);
-  fireLight.add(AxesHelper);
-
-  gui.add(fireLight.position, 'x').min(-10).max(10).step(0.01).name('Fire Light Position X');
-  gui.add(fireLight.position, 'y').min(-10).max(10).step(0.01).name('Fire Light Position Y');
-  gui.add(fireLight.position, 'z').min(-10).max(10).step(0.01).name('Fire Light Position Z');
   gui.add(fireLight, 'intensity').min(0).max(5).step(0.01).name('Fire Light Intensity');
   gui.add(fireLight, 'distance').min(0).max(10).step(0.01).name('Fire Light Distance');
   gui.add(fireLight, 'decay').min(0).max(5).step(0.01).name('Fire Light Decay');
@@ -96,15 +75,7 @@ const table = async () => {
   fireAnimation.scale.y = 0.75;
   fireAnimation.scale.z = 2;
   fireAnimation.scale.x = 0.6;
-  // AXIS HELPER TO FIREANIMATION
   group.add(fireAnimation);
-
-  gui.add(fireAnimation.position, 'x').min(-10).max(10).step(0.01).name('Candle Fire Position X');
-  gui.add(fireAnimation.position, 'y').min(-10).max(10).step(0.01).name('Candle Fire Position Y');
-  gui.add(fireAnimation.position, 'z').min(-10).max(10).step(0.01).name('Candle Fire Position Z');
-  gui.add(fireAnimation.scale, 'x').min(0).max(2).step(0.01).name('Candle Fire Scale X');
-  gui.add(fireAnimation.scale, 'y').min(0).max(2).step(0.01).name('Candle Fire Scale Y');
-  gui.add(fireAnimation.scale, 'z').min(0).max(5).step(0.01).name('Candle Fire Scale Z');
 
   return group;
 };

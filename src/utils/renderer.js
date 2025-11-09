@@ -6,7 +6,12 @@ import gui from './gui';
 export const canvas = document.querySelector('canvas.webgl');
 
 export const camera = new THREE.PerspectiveCamera(20, screenSizes.width / screenSizes.height);
-camera.position.set(15, 6, 20);
+camera.position.x = 0;
+camera.position.y = 8.25;
+camera.position.z = 35;
+gui.add(camera.position, 'x').min(-50).max(50).step(0.01).name('Camera X Position');
+gui.add(camera.position, 'y').min(-50).max(50).step(0.01).name('Camera Y Position');
+gui.add(camera.position, 'z').min(-50).max(50).step(0.01).name('Camera Z Position');
 
 // Controls
 export const controls = new OrbitControls(camera, canvas);

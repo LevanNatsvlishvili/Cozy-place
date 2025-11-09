@@ -8,6 +8,7 @@ import { ambientLight, directionalLight } from './components/lights/lights.js';
 import sofa from '@/components/models/sofa';
 import hearth from './components/models/hearth';
 import table from './components/models/table';
+import shelf from './components/models/shelf';
 
 /**
  * Base
@@ -40,19 +41,19 @@ windowModel.material.opacity = 0.4;
 windowModel.material.transparent = true;
 scene.add(windowModel);
 
+// Base
+scene.add(floor);
+scene.add(walls);
+
 // Models
 const hearthModel = await hearth();
 const sofaModel = await sofa();
 const tableModel = await table();
+const shelfModel = await shelf();
 scene.add(hearthModel);
 scene.add(sofaModel);
 scene.add(tableModel);
-// gui.add(chair.position, 'y').min(-2).max(2).step(0.01).name('Chair Position Y');
-// gui.add(chair.position, 'x').min(-5).max(5).step(0.01).name('Chair Position X');
-// gui.add(chair.position, 'z').min(-5).max(5).step(0.01).name('Chair Position Z');
-
-scene.add(floor);
-scene.add(walls);
+scene.add(shelfModel);
 
 /**
  * Animate
