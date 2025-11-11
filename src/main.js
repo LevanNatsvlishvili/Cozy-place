@@ -17,7 +17,6 @@ import shelf from './components/models/shelf';
 
 // Scene
 const scene = new THREE.Scene();
-// scene.add(new THREE.AxesHelper(5));
 
 // Lights
 scene.add(ambientLight);

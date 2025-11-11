@@ -1,5 +1,4 @@
 import gltfLoader from '@/utils/loader/gtlfLoader';
-import gui from '@/utils/gui';
 
 const props = {
   scale: 2,

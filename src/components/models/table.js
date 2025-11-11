@@ -8,7 +8,7 @@ const props = {
 
 const table = async () => {
   const group = new THREE.Group();
-  const glb = await gltfLoader.loadAsync('./models/table_low_polygon.glb');
+  const glb = await gltfLoader.loadAsync('./models/table.glb');
   const model = glb.scene;
   model.traverse((child) => {
     if (child.isMesh) {
@@ -52,7 +52,7 @@ const table = async () => {
 
   // Candle Fire
   const video = document.createElement('video');
-  video.src = '/candle_fire_5.mp4';
+  video.src = '/candle_fire.mp4';
   video.loop = true;
   video.muted = true;
   video.play();

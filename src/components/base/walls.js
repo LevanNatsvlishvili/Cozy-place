@@ -37,7 +37,7 @@ const wallMaterial = new THREE.MeshStandardMaterial({
 });
 
 wallMaterial.transparent = true;
-wallMaterial.opacity = 0; // to fix some z-fighting issues with floor
+wallMaterial.opacity = 1; // to fix some z-fighting issues with floor
 gui.add(wallMaterial, 'transparent').name('Wall Material Transparent');
 gui.add(wallMaterial, 'opacity').min(0).max(1).step(0.01).name('Wall Material Opacity');
 
@@ -67,40 +67,19 @@ sideWalls2.position.x = sideWallCoordinates.x2;
 sideWalls2.position.y = sideWallCoordinates.y;
 sideWalls2.rotation.y = Math.PI * 0.5;
 
-// Bent side walls
-const bentSideWallGeometry = new THREE.BoxGeometry(
+const roofGeometry = new THREE.BoxGeometry(
+  floorCoordinates.width, // along Y
   floorCoordinates.length, // along X
-  floorCoordinates.width / 2 + 0.2, // along Y
   0.1, // thin
   1,
   64,
-  1 // widthSegments, heightSegments, depthSegments
+  1
 );
-bentSideWallGeometry.setAttribute('uv2', new THREE.BufferAttribute(bentSideWallGeometry.attributes.uv.array, 2));
-const bentSideWall = new THREE.Mesh(bentSideWallGeometry, wallMaterial);
-// bentSideWall.rotation.y = Math.PI * 0.5;
-// bentSideWall.rotateOnAxis(new THREE.Vector3(1, 0, 0), Math.PI * -0.3);
 
-bentSideWall.position.x = sideWallCoordinates.x1 - floorCoordinates.width / 4;
-bentSideWall.position.z = sideWallCoordinates.z;
-bentSideWall.position.y = wallCoordinates.height + 0.75;
-const bentSideWall1 = bentSideWall.clone();
-const bentSideWall2 = bentSideWall.clone();
-bentSideWall1.rotateOnAxis(new THREE.Vector3(1, 0, 0), Math.PI * -0.5);
-bentSideWall2.rotateOnAxis(new THREE.Vector3(1, 0, 0), Math.PI * -0.5);
-bentSideWall1.rotation.z = Math.PI * 0.5;
-bentSideWall1.rotation.y = Math.PI * 0.1;
-bentSideWall2.rotation.z = Math.PI * -0.5;
-bentSideWall2.rotation.y = Math.PI * -0.1;
-
-gui.add(bentSideWall2.position, 'y').min(0).max(10).step(0.01).name('Bent Side Wall Y Position');
-
-// bentSideWall2.rotateOnAxis(new THREE.Vector3(1, 0, 0), Math.PI * -0.5);
-// bentSideWall2.rotation.y = Math.PI * -0.25;
-gui.add(bentSideWall2.rotation, 'x').min(-Math.PI).max(Math.PI).step(0.01).name('Bent Side Wall 2 Rotation X');
-gui.add(bentSideWall2.rotation, 'y').min(-Math.PI).max(Math.PI).step(0.01).name('Bent Side Wall 2 Rotation Y');
-gui.add(bentSideWall2.rotation, 'z').min(-Math.PI).max(Math.PI).step(0.01).name('Bent Side Wall 2 Rotation Z');
-bentSideWall2.position.x = sideWallCoordinates.x2 + floorCoordinates.width / 4;
+const roof = new THREE.Mesh(roofGeometry, wallMaterial);
+roof.position.y = wallCoordinates.height;
+roof.position.z = sideWallCoordinates.z;
+roof.rotation.x = Math.PI * 0.5;
 
 // BACK WALL //
 const backWallGeom = new THREE.BoxGeometry(
@@ -114,19 +93,15 @@ const backWallGeom = new THREE.BoxGeometry(
 backWallGeom.setAttribute('uv2', new THREE.BufferAttribute(backWallGeom.attributes.uv.array, 2));
 
 const backWall = new THREE.Mesh(backWallGeom, wallMaterial);
-backWall.position.z = backWallCoordinates.z;
+// backWall.position.z = -backWallCoordinates.z;
 
 const backWall1 = backWall.clone();
-const backWall2 = backWall.clone();
 backWall1.position.y = wallCoordinates.height * 0.5;
-backWall2.position.y = wallCoordinates.height + floorCoordinates.width / 4;
 
 const group = new THREE.Group();
-group.add(sideWalls1);
+// group.add(sideWalls1);
 group.add(sideWalls2);
-group.add(bentSideWall1);
-group.add(bentSideWall2);
 group.add(backWall1);
-group.add(backWall2);
+group.add(roof);
 
 export default group;
