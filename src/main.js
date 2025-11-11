@@ -9,6 +9,7 @@ import sofa from '@/components/models/sofa';
 import hearth from './components/models/hearth';
 import table from './components/models/table';
 import shelf from './components/models/shelf';
+import curtain from './components/models/curtain';
 
 /**
  * Base
@@ -49,10 +50,12 @@ const hearthModel = await hearth();
 const sofaModel = await sofa();
 const tableModel = await table();
 const shelfModel = await shelf();
+const curtainModel = await curtain();
 scene.add(hearthModel);
 scene.add(sofaModel);
 scene.add(tableModel);
 scene.add(shelfModel);
+scene.add(curtainModel);
 
 /**
  * Animate
