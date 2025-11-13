@@ -14,7 +14,7 @@ const hearth = async () => {
   const group = new THREE.Group();
 
   // Hearth model
-  const glb = await gltfLoader.loadAsync('./models/hearth.glb');
+  const glb = await gltfLoader.loadAsync('./models/hearth_2.glb');
   const model = glb.scene;
   model.position.x = -4.5;
   model.position.z = 3;

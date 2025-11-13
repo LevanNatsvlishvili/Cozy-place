@@ -5,7 +5,7 @@ const props = {
 };
 
 const shelf = async () => {
-  const glb = await gltfLoader.loadAsync('./models/shelf.glb');
+  const glb = await gltfLoader.loadAsync('./models/shelf_3.glb');
   const model = glb.scene;
   model.position.x = -4.5;
   model.position.z = 10.5;

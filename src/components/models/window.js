@@ -1,11 +1,12 @@
 import * as THREE from 'three';
 import gltfLoader from '@/utils/loader/gtlfLoader';
+import gui from '@/utils/gui';
 // import gui from '@/utils/gui';
 
 const window = async () => {
-  const windowGlb = await gltfLoader.loadAsync('./models/window_2.glb');
+  const windowGlb = await gltfLoader.loadAsync('./models/window_rain.glb');
   const windowModel = windowGlb.scene;
-  // Window
+  // Window - Jagged edges need to be resolved later
   windowModel.position.x = -2.75;
   windowModel.position.y = 1;
   windowModel.position.z = 0;
@@ -14,16 +15,23 @@ const window = async () => {
   windowModel.scale.y = 1.5;
   windowModel.scale.z = 0.5;
 
+  windowModel.traverse((child) => {
+    if (child.isMesh && child.name === 'Glass_Glass01_0') {
+      child.material.transparent = true;
+      child.material.opacity = 0.25;
+    }
+  });
+
   const group = new THREE.Group();
   group.add(windowModel);
 
   // Lightning
   const video = document.createElement('video');
-  video.src = '/lightning_4.mp4';
+  video.src = '/lightning_3.mp4';
   video.loop = true;
   video.muted = true;
   video.play();
-  video.playbackRate = 0.65;
+  video.playbackRate = 0.8;
 
   const lightningTexture = new THREE.VideoTexture(video);
   lightningTexture.encoding = THREE.sRGBEncoding;
@@ -39,6 +47,11 @@ const window = async () => {
   lightningAnimation.scale.y = 2;
   lightningAnimation.scale.z = 1;
   lightningAnimation.scale.x = 2.38;
+
+  // Opacity
+  lightningAnimation.material.transparent = true;
+  // lightningAnimation.material.opacity = 0.4;
+  gui.add(lightningAnimation.material, 'opacity').min(0).max(1).step(0.01).name('lightning opacity');
 
   group.add(lightningAnimation);
 
