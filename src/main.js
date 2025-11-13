@@ -10,6 +10,7 @@ import hearth from './components/models/hearth';
 import table from './components/models/table';
 import shelf from './components/models/shelf';
 import curtain from './components/models/curtain';
+import windowFrame from './components/models/window';
 
 /**
  * Base
@@ -28,18 +29,6 @@ scene.add(camera);
 
 // Resizes window every time the window size changes
 windowResizer(camera, renderer);
-// Controls
-
-// Models
-const windowModel = new THREE.Mesh(
-  new THREE.PlaneGeometry(windowCoordinates.width, windowCoordinates.height),
-  new THREE.MeshBasicMaterial({ color: 'blue', side: THREE.DoubleSide })
-);
-windowModel.position.set(0, windowCoordinates.height / 2, windowCoordinates.z);
-// Opacity for window
-windowModel.material.opacity = 0.4;
-windowModel.material.transparent = true;
-scene.add(windowModel);
 
 // Base
 scene.add(floor);
@@ -51,11 +40,13 @@ const sofaModel = await sofa();
 const tableModel = await table();
 const shelfModel = await shelf();
 const curtainModel = await curtain();
+const windowModel = await windowFrame();
 scene.add(hearthModel);
 scene.add(sofaModel);
 scene.add(tableModel);
 scene.add(shelfModel);
 scene.add(curtainModel);
+scene.add(windowModel);
 
 /**
  * Animate
@@ -63,7 +54,7 @@ scene.add(curtainModel);
 const clock = new THREE.Clock();
 
 const tick = () => {
-  const elapsedTime = clock.getElapsedTime();
+  const dt = clock.getDelta();
 
   // Update controls
   controls.update();
