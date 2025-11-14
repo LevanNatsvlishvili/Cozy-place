@@ -49,6 +49,7 @@ scene.add(windowModel); // 500
 // Add lights
 // Add animation that makes the light go off and shows lightning more pronounced
 // Add cat in front of hearth with animation
+// Reposition candles lighting, it dissapears from the angle
 
 /**
  * Animate

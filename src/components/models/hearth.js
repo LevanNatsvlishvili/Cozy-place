@@ -1,5 +1,4 @@
 import gltfLoader from '@/utils/loader/gtlfLoader';
-import gui from '@/utils/gui';
 import * as THREE from 'three';
 import loadVideo from '@/utils/loader/videoLoader';
 
@@ -30,13 +29,6 @@ const hearth = async () => {
   model.scale.set(props.scale.x, props.scale.y, props.scale.z);
   group.add(model);
 
-  gui.add(model.position, 'x').min(-10).max(10).step(0.01).name('Hearth X Position');
-  gui.add(model.position, 'y').min(0).max(10).step(0.01).name('Hearth Y Position');
-  gui.add(model.position, 'z').min(-10).max(10).step(0.01).name('Hearth Z Position');
-  gui.add(model.rotation, 'y').min(-Math.PI).max(Math.PI).step(0.01).name('Hearth Y Rotation');
-  gui.add(model.rotation, 'x').min(-Math.PI).max(Math.PI).step(0.01).name('Hearth X Rotation');
-  gui.add(model.rotation, 'z').min(-Math.PI).max(Math.PI).step(0.01).name('Hearth Z Rotation');
-
   // Fire Animation
   const video = await loadVideo('/fire.mp4');
   video.play();
@@ -60,8 +52,6 @@ const hearth = async () => {
   fireAnimation.scale.z = 2;
   fireAnimation.scale.x = 1.3;
   fireAnimation.rotation.y = props.rotation;
-
-  gui.add(fireAnimation.position, 'x').min(-5).max(5).step(0.01).name('Fire X Position');
 
   group.add(fireAnimation);
 

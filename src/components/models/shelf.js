@@ -19,9 +19,6 @@ const shelf = async () => {
   model.traverse((child) => {
     if (child.isMesh) {
       child.material.color.set('#707070');
-      gui.addColor({ color: '#8b4513' }, 'color').onChange((value) => {
-        child.material.color.set(value);
-      });
     }
   });
 
