@@ -45,7 +45,10 @@ scene.add(shelfModel); // 2300ms
 scene.add(windowModel); // 500
 
 // To do
+// Add tv and tv stand with PS5
+// Add lights
 // Add animation that makes the light go off and shows lightning more pronounced
+// Add cat in front of hearth with animation
 
 /**
  * Animate
