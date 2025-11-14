@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import gltfLoader from '@/utils/loader/gtlfLoader';
 import gui from '@/utils/gui';
+import loadVideo from '@/utils/loader/videoLoader';
 // import gui from '@/utils/gui';
 
 const window = async () => {
@@ -26,10 +27,7 @@ const window = async () => {
   group.add(windowModel);
 
   // Lightning
-  const video = document.createElement('video');
-  video.src = '/lightning_3.mp4';
-  video.loop = true;
-  video.muted = true;
+  const video = await loadVideo('/lightning_3.mp4');
   video.play();
   video.playbackRate = 0.8;
 

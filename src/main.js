@@ -3,10 +3,9 @@ import walls from './components/base/walls';
 import floor from './components/base/floor';
 import windowResizer from './utils/windowResizer';
 import { camera, renderer, controls } from './utils/renderer.js';
-import { windowCoordinates } from './components/base/consts/common.js';
 import { ambientLight, directionalLight } from './components/lights/lights.js';
-import sofa from '@/components/models/sofa';
 import hearth from './components/models/hearth';
+import sofa from '@/components/models/sofa';
 import table from './components/models/table';
 import shelf from './components/models/shelf';
 import curtain from './components/models/curtain';
@@ -35,18 +34,21 @@ scene.add(floor);
 scene.add(walls);
 
 // Models
-const hearthModel = await hearth();
-const sofaModel = await sofa();
-const tableModel = await table();
-const shelfModel = await shelf();
-const curtainModel = await curtain();
-const windowModel = await windowFrame();
-scene.add(hearthModel);
-scene.add(sofaModel);
-scene.add(tableModel);
-scene.add(shelfModel);
-scene.add(curtainModel);
-scene.add(windowModel);
+const hearthModel = await hearth(); // 1.9mb
+const sofaModel = await sofa(); // 1.7mb
+const tableModel = await table(); // 2.3mb
+const shelfModel = await shelf(); // 3.4mb
+const curtainModel = await curtain(); // 3.2mb
+const windowModel = await windowFrame(); // 3mb
+scene.add(hearthModel); // 600 ms
+scene.add(sofaModel); // 500ms
+scene.add(tableModel); // 500
+scene.add(shelfModel); // 2300ms
+scene.add(curtainModel); // 700
+scene.add(windowModel); // 500
+
+// To do
+// Add animation that makes the light go off and shows lightning more pronounced
 
 /**
  * Animate

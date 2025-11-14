@@ -1,6 +1,7 @@
 import gltfLoader from '@/utils/loader/gtlfLoader';
 import gui from '@/utils/gui';
 import * as THREE from 'three';
+import loadVideo from '@/utils/loader/videoLoader';
 
 const props = {
   scale: {
@@ -24,10 +25,7 @@ const hearth = async () => {
   group.add(model);
 
   // Fire Animation
-  const video = document.createElement('video');
-  video.src = '/fire.mp4';
-  video.loop = true;
-  video.muted = true;
+  const video = await loadVideo('/fire.mp4');
   video.play();
   video.playbackRate = 0.65;
 

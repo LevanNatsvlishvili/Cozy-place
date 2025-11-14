@@ -1,6 +1,7 @@
 import gltfLoader from '@/utils/loader/gtlfLoader';
 import gui from '@/utils/gui';
 import * as THREE from 'three';
+import loadVideo from '@/utils/loader/videoLoader';
 
 const props = {
   scale: 1.5,
@@ -51,10 +52,7 @@ const table = async () => {
   group.add(fireLight);
 
   // Candle Fire
-  const video = document.createElement('video');
-  video.src = '/candle_fire.mp4';
-  video.loop = true;
-  video.muted = true;
+  const video = await loadVideo('/candle_fire.mp4');
   video.play();
   video.playbackRate = 1;
 
