@@ -4,7 +4,7 @@ import gui from '@/utils/gui';
 import loadVideo from '@/utils/loader/videoLoader';
 // import gui from '@/utils/gui';
 
-const window = async () => {
+const frame = async () => {
   const windowGlb = await gltfLoader.loadAsync('./models/window_rain.glb');
   const windowModel = windowGlb.scene;
   // Window - Jagged edges need to be resolved later
@@ -56,4 +56,4 @@ const window = async () => {
   return group;
 };
 
-export default window;
+export default frame;
