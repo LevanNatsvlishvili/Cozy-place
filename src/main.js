@@ -9,6 +9,7 @@ import sofa from '@/components/models/sofa';
 import table from './components/models/table';
 import shelf from './components/models/shelf';
 import windowFrame from './components/models/window';
+import tvStation from './components/models/tvStation';
 
 /**
  * Base
@@ -33,16 +34,18 @@ scene.add(floor);
 scene.add(walls);
 
 // Models
-const hearthModel = await hearth(); // 1.9mb
-const sofaModel = await sofa(); // 1.7mb
-const tableModel = await table(); // 2.3mb
-const shelfModel = await shelf(); // 3.4mb
-const windowModel = await windowFrame(); // 3mb
-scene.add(hearthModel); // 600 ms
-scene.add(sofaModel); // 500ms
-scene.add(tableModel); // 500
-scene.add(shelfModel); // 2300ms
-scene.add(windowModel); // 500
+// const hearthModel = await hearth(); // 1.9mb
+// const sofaModel = await sofa(); // 1.7mb
+// const tableModel = await table(); // 2.3mb
+// const shelfModel = await shelf(); // 3.4mb
+// const windowModel = await windowFrame(); // 3mb
+const tvStationModel = await tvStation();
+// scene.add(hearthModel); // 600 ms
+// scene.add(sofaModel); // 500ms
+// scene.add(tableModel); // 500
+// scene.add(shelfModel); // 2300ms
+// scene.add(windowModel); // 500
+scene.add(tvStationModel);
 
 // To do
 // Add tv and tv stand with PS5
@@ -50,6 +53,7 @@ scene.add(windowModel); // 500
 // Add animation that makes the light go off and shows lightning more pronounced
 // Add cat in front of hearth with animation
 // Reposition candles lighting, it dissapears from the angle
+// Add loading screen while models are being loaded
 
 /**
  * Animate
