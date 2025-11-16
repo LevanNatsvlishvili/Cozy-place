@@ -5,7 +5,7 @@ const props = {
 };
 
 const stand = async (position) => {
-  const glb = await gltfLoader.loadAsync('./models/tv_station/tv_stand_compressed.glb');
+  const glb = await gltfLoader.loadAsync('./models/tv_station/tv_stand.glb');
   const model = glb.scene;
   model.position.x = position.x;
   model.position.z = position.z;

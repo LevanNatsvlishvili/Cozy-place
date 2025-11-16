@@ -5,6 +5,9 @@ import loadVideo from '@/utils/loader/videoLoader';
 
 const props = {
   scale: 1.5,
+  position: {
+    z: 5,
+  },
 };
 
 const table = async () => {
@@ -28,7 +31,7 @@ const table = async () => {
   });
 
   model.position.x = 0.5;
-  model.position.z = 3;
+  model.position.z = props.position.z;
   model.position.y = 0.5;
   model.rotateY(Math.PI / -2);
 
@@ -49,8 +52,6 @@ const table = async () => {
   gui.add(fireLight, 'distance').min(0).max(10).step(0.01).name('Fire Light Distance');
   gui.add(fireLight, 'decay').min(0).max(5).step(0.01).name('Fire Light Decay');
 
-  group.add(fireLight);
-
   // Candle Fire
   const video = await loadVideo('/candle_fire.mp4');
   video.play();
@@ -67,13 +68,21 @@ const table = async () => {
   });
 
   const fireAnimation = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), fireMaterial);
-  fireAnimation.position.z = 3;
-  fireAnimation.position.x = 0.625;
+
+  group.add(fireLight);
+  fireAnimation.position.z = props.position.z - 0.05;
+  fireAnimation.position.x = 0.6;
   fireAnimation.position.y = 1.25;
   fireAnimation.scale.y = 0.75;
   fireAnimation.scale.z = 2;
   fireAnimation.scale.x = 0.6;
+  fireAnimation.rotation.y = Math.PI / 4;
+
+  gui.add(fireAnimation.rotation, 'y').min(-Math.PI).max(Math.PI).step(0.01).name('fireAnimation Rotation Y');
+
   group.add(fireAnimation);
+
+  // group.position.z = 5
 
   return group;
 };

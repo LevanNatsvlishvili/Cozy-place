@@ -34,21 +34,20 @@ scene.add(floor);
 scene.add(walls);
 
 // Models
-// const hearthModel = await hearth(); // 1.9mb
-// const sofaModel = await sofa(); // 1.7mb
-// const tableModel = await table(); // 2.3mb
-// const shelfModel = await shelf(); // 3.4mb
-// const windowModel = await windowFrame(); // 3mb
+const hearthModel = await hearth(); // 1.9mb
+const sofaModel = await sofa(); // 1.7mb
+const tableModel = await table(); // 2.3mb
+const shelfModel = await shelf(); // 3.4mb
+const windowModel = await windowFrame(); // 3mb
 const tvStationModel = await tvStation();
-// scene.add(hearthModel); // 600 ms
-// scene.add(sofaModel); // 500ms
-// scene.add(tableModel); // 500
-// scene.add(shelfModel); // 2300ms
-// scene.add(windowModel); // 500
+scene.add(hearthModel); // 600 ms
+scene.add(sofaModel); // 500ms
+scene.add(tableModel); // 500
+scene.add(shelfModel); // 2300ms
+scene.add(windowModel); // 500
 scene.add(tvStationModel);
 
 // To do
-// Add tv and tv stand with PS5
 // Add lights
 // Add animation that makes the light go off and shows lightning more pronounced
 // Add cat in front of hearth with animation

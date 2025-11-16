@@ -3,6 +3,7 @@ import gltfLoader from '@/utils/loader/gtlfLoader';
 import stand from './stand';
 import * as THREE from 'three';
 import playstation from './playstation';
+import tv from './tv';
 
 const props = {
   scale: 2,
@@ -12,12 +13,14 @@ const props = {
   },
 };
 
-const station = async (position) => {
+const station = async () => {
   const group = new THREE.Group();
   const standModel = await stand(props.position);
   const playstationModel = await playstation(props.position);
+  const tvModel = await tv();
   group.add(standModel);
   group.add(playstationModel);
+  group.add(tvModel);
 
   return group;
 };

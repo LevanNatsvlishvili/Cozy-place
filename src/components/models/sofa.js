@@ -14,7 +14,7 @@ const sofa = async () => {
     }
   });
   model.position.x = 3.75;
-  model.position.z = 3;
+  model.position.z = 5;
 
   model.scale.set(props.scale, props.scale, props.scale);
 
