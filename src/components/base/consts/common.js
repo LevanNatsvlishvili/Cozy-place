@@ -25,3 +25,7 @@ export const backWallCoordinates = {
   width: floorCoordinates.width,
   height: wallCoordinates.height,
 };
+
+export const colors = {
+  light: '#ffd27f',
+};

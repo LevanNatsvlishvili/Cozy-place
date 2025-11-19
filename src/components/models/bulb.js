@@ -8,22 +8,23 @@ const props = {
 };
 
 const bulb = async () => {
+  const group = new THREE.Group();
   const glb = await gltfLoader.loadAsync('./models/bulb.glb');
   const model = glb.scene;
-  let bulbGlass;
+  // console.log(model);
   model.traverse((child) => {
-    if (child.isMesh) {
+    child.isMesh && console.log(child);
+
+    if (child.isMesh && child.name === 'Bulb_A004_M_BulbGlass_0') {
       // Dark grey color
       child.material.color.setHex(0x2f3a3b);
-      // child.material.color.set('#ffffff');
-      child.material.emissive = new THREE.Color('#ffd27f'); // warm yellow-orange
-      child.material.emissiveIntensity = 2.2;
+      child.material.emissive = new THREE.Color('#ffd27f');
+      child.material.emissiveIntensity = 2;
       child.material.roughness = 0.1;
       child.material.metalness = 0;
       child.material.transparent = true;
       child.material.opacity = 0.9;
-
-      bulbGlass = child;
+      child.material.needsUpdate = true;
     }
   });
   // model.position.x = 3.75;
@@ -32,29 +33,21 @@ const bulb = async () => {
 
   model.scale.set(props.scale, props.scale, props.scale);
 
-  const bulbLight = new THREE.PointLight('#ffd27f', 1.4, 7);
-  const axesHelper = new THREE.AxesHelper(1);
-  model.add(axesHelper);
-  bulbLight.position.set(model.position.x, wallCoordinates.height - 1.5, model.position.z);
-  gui.add(bulbLight.rotation, 'x').min(-Math.PI).max(Math.PI).step(0.01).name('Bulb Light X');
-  gui.add(bulbLight.rotation, 'y').min(-Math.PI).max(Math.PI).step(0.01).name('Bulb Light Y');
-  gui.add(bulbLight.rotation, 'z').min(-Math.PI).max(Math.PI).step(0.01).name('Bulb Light Z');
+  // const bulbLight = new THREE.PointLight('#ffd27f', 5);
+  const bulbLight = new THREE.PointLight('#ffd27f', 30, 12, 1.2);
+  // gui.add(bulbLight, 'power').min(0).max(500).step(1).name('Bulb Light Power');
+  // gui.add(bulbLight, 'intensity').min(0).max(100).step(0.01).name('Bulb Light Intensity');
+  // gui.add(bulbLight, 'distance').min(0).max(100).step(0.01).name('Bulb Light Distance');
+  // gui.add(bulbLight, 'decay').min(0).max(5).step(0.01).name('Bulb Light Decay');
+
+  bulbLight.position.z = floorCoordinates.length / 2;
+  bulbLight.position.y = wallCoordinates.height - 1.5;
 
   // Attach light to the bulb so they move together
-  model.add(bulbLight);
+  group.add(model);
+  group.add(bulbLight);
 
-  // For debugging light position
-  const lightHelper = new THREE.PointLightHelper(bulbLight, 0.1);
-  model.add(lightHelper);
-
-  // GUI controls
-  gui.add(bulbLight, 'intensity').min(0).max(5).step(0.01).name('Bulb Intensity');
-  gui
-    .addColor({ color: bulbLight.color.getHex() }, 'color')
-    .name('Bulb Color')
-    .onChange((v) => bulbLight.color.set(v));
-
-  return model;
+  return group;
 };
 
 export default bulb;
