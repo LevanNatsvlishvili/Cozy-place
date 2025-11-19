@@ -1,4 +1,3 @@
-import gui from '@/utils/gui';
 import gltfLoader from '@/utils/loader/gtlfLoader';
 
 const props = {

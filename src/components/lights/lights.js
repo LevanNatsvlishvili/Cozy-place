@@ -7,7 +7,7 @@ ambientLight.raycast = true;
 ambientLight.wireframe = true;
 // ambientLight.add(new THREE.AxesHelper(2));
 
-gui.add(ambientLight, 'intensity').min(0).max(1).step(0.01).name('Ambient Light Intensity');
+gui.add(ambientLight, 'intensity').min(0).max(30).step(0.01).name('Ambient Light Intensity');
 gui.add(ambientLight.position, 'x').min(-10).max(10).step(0.01).name('Ambient Light X');
 gui.add(ambientLight.position, 'y').min(-10).max(10).step(0.01).name('Ambient Light Y');
 gui.add(ambientLight.position, 'z').min(-10).max(10).step(0.01).name('Ambient Light Z');

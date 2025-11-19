@@ -17,12 +17,6 @@ const cat = async () => {
   cat.userData.originalScale = props.scale;
   cat.scale.set(props.scale, props.scale, props.scale);
 
-  // cat.material.emissive = new THREE.Color('#ff7a3c');
-  // cat.material.emissiveIntensity = Math.sin(t * 2) * 0.1 + 0.1;
-
-  cat.position.x += (Math.random() - 0.5) * 0.0002;
-  cat.position.z += (Math.random() - 0.5) * 0.0002;
-
   cat.traverse((child) => {
     if (child.isMesh) {
       // child.castShadow = true;

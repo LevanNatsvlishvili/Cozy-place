@@ -53,6 +53,8 @@ scene.add(tvStationModel);
 // To do
 // Add cat in front of hearth with animation
 // Add lights
+// Flickering animation
+// Light in front of hearth
 // Add animation that makes the light go off and shows lightning more pronounced
 // Add loading screen while models are being loaded
 
