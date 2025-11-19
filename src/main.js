@@ -11,6 +11,8 @@ import shelf from './components/models/shelf';
 import windowFrame from './components/models/window';
 import tvStation from './components/models/tvStation';
 import cat from './components/models/cat';
+import bulb from './components/models/bulb';
+import catBreathing from './utils/animations/catBreathing';
 
 /**
  * Base
@@ -35,20 +37,22 @@ scene.add(floor);
 scene.add(walls);
 
 // Models
-const hearthModel = await hearth(); // 1.9mb
-const catModel = await cat(); // 1.9mb
-const sofaModel = await sofa(); // 1.7mb
-const tableModel = await table(); // 2.3mb
-const shelfModel = await shelf(); // 3.4mb
-const windowModel = await windowFrame(); // 3mb
-const tvStationModel = await tvStation();
-scene.add(hearthModel); // 600 ms
-scene.add(catModel);
-scene.add(sofaModel); // 500ms
-scene.add(tableModel); // 500
-scene.add(shelfModel); // 2300ms
-scene.add(windowModel); // 500
-scene.add(tvStationModel);
+// const hearthModel = await hearth(); // 1.9mb
+// const catModel = await cat(); // 1.9mb
+// const sofaModel = await sofa(); // 1.7mb
+// const tableModel = await table(); // 2.3mb
+// const shelfModel = await shelf(); // 3.4mb
+// const windowModel = await windowFrame(); // 3mb
+// const tvStationModel = await tvStation();
+const bulbModel = await bulb();
+// scene.add(hearthModel); // 600 ms
+// scene.add(catModel);
+// scene.add(sofaModel); // 500ms
+// scene.add(tableModel); // 500
+// scene.add(shelfModel); // 2300ms
+// scene.add(windowModel); // 500
+// scene.add(tvStationModel);
+scene.add(bulbModel);
 
 // To do
 // Add cat in front of hearth with animation
@@ -66,21 +70,9 @@ const clock = new THREE.Clock();
 const tick = () => {
   const dt = clock.getDelta();
 
-  if (catModel) {
-    const t = clock.getElapsedTime();
-    const breatheSpeed = 1.2; // breathing tempo
-    const breatheAmount = 0.01; // size change
-
-    const base = catModel.userData.originalScale;
-
-    // Breathing scale on Y axis
-    const sY = base + Math.sin(t * breatheSpeed) * breatheAmount;
-    catModel.scale.set(base, sY, base);
-
-    // Lift cat so it doesn’t sink into the floor
-    const lift = (sY - base) * 0.5; // compensate half the scale change
-    catModel.position.y = catModel.userData.originalY + lift;
-  }
+  // if (catModel) {
+  //   catBreathing(catModel, clock);
+  // }
 
   // Update controls
   controls.update();
