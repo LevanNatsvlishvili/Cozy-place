@@ -7,7 +7,7 @@ const props = {
 };
 
 const cat = async () => {
-  const catGlb = await gltfLoader.loadAsync('./models/cat/cat_5.glb');
+  const catGlb = await gltfLoader.loadAsync('./models/cat.glb');
   const cat = catGlb.scene;
   cat.position.x = -2.9;
   cat.position.z = 3;
