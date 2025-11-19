@@ -6,9 +6,9 @@ import gui from './gui';
 export const canvas = document.querySelector('canvas.webgl');
 
 export const camera = new THREE.PerspectiveCamera(25.77, screenSizes.width / screenSizes.height);
-camera.position.x = 8.21;
-camera.position.y = 5.75;
-camera.position.z = 32.79;
+camera.position.x = -4;
+camera.position.y = 2.1;
+camera.position.z = 11.9;
 gui.add(camera.position, 'x').min(-50).max(50).step(0.01).name('Camera X Position');
 gui.add(camera.position, 'y').min(-50).max(50).step(0.01).name('Camera Y Position');
 gui.add(camera.position, 'z').min(-50).max(50).step(0.01).name('Camera Z Position');
