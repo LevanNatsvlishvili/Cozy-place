@@ -39,9 +39,12 @@ const bulb = async () => {
   // gui.add(bulbLight, 'intensity').min(0).max(100).step(0.01).name('Bulb Light Intensity');
   // gui.add(bulbLight, 'distance').min(0).max(100).step(0.01).name('Bulb Light Distance');
   // gui.add(bulbLight, 'decay').min(0).max(5).step(0.01).name('Bulb Light Decay');
-
+  // Turn off the light with gui checkmark
+  gui.add(bulbLight, 'visible').name('Bulb Light Visible');
+  gui.add(bulbLight, 'intensity').min(0).max(100).step(0.01).name('Bulb Light Intensity');
   bulbLight.position.z = floorCoordinates.length / 2;
   bulbLight.position.y = wallCoordinates.height - 1.5;
+  bulbLight.visible = false;
 
   // Attach light to the bulb so they move together
   group.add(model);

@@ -13,6 +13,7 @@ import tvStation from './components/models/tvStation';
 import cat from './components/models/cat';
 import bulb from './components/models/bulb';
 import catBreathing from './utils/animations/catBreathing';
+import candleFlickering from './utils/animations/candleFlickering';
 
 /**
  * Base
@@ -37,30 +38,31 @@ scene.add(floor);
 scene.add(walls);
 
 // Models
-// const hearthModel = await hearth(); // 1.9mb
-// const catModel = await cat(); // 1.9mb
-// const sofaModel = await sofa(); // 1.7mb
-// const tableModel = await table(); // 2.3mb
-// const shelfModel = await shelf(); // 3.4mb
-// const windowModel = await windowFrame(); // 3mb
-// const tvStationModel = await tvStation();
+const hearthModel = await hearth(); // 1.9mb
+const catModel = await cat(); // 1.9mb
+const sofaModel = await sofa(); // 1.7mb
+const tableModel = await table(); // 2.3mb
+const shelfModel = await shelf(); // 3.4mb
+const windowModel = await windowFrame(); // 3mb
+const tvStationModel = await tvStation();
 const bulbModel = await bulb();
-// scene.add(hearthModel); // 600 ms
-// scene.add(catModel);
-// scene.add(sofaModel); // 500ms
-// scene.add(tableModel); // 500
-// scene.add(shelfModel); // 2300ms
-// scene.add(windowModel); // 500
-// scene.add(tvStationModel);
+scene.add(hearthModel); // 600 ms
+scene.add(catModel);
+scene.add(sofaModel); // 500ms
+scene.add(tableModel); // 500
+scene.add(shelfModel); // 2300ms
+scene.add(windowModel); // 500
+scene.add(tvStationModel);
 scene.add(bulbModel);
 
 // To do
-// Add cat in front of hearth with animation
 // Add lights
 // Flickering animation
 // Light in front of hearth
+// Cast shadows
 // Add animation that makes the light go off and shows lightning more pronounced
 // Add loading screen while models are being loaded
+// Add click interaction to turn on/off lights and other elements
 
 /**
  * Animate
@@ -68,11 +70,16 @@ scene.add(bulbModel);
 const clock = new THREE.Clock();
 
 const tick = () => {
-  const dt = clock.getDelta();
+  const et = clock.getElapsedTime();
 
   // if (catModel) {
   //   catBreathing(catModel, clock);
   // }
+
+  if (tableModel) {
+    // console.log(tableModel);
+    candleFlickering(tableModel.userData.fireLight, et);
+  }
 
   // Update controls
   controls.update();
