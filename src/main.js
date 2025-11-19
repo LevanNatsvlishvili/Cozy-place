@@ -57,7 +57,7 @@ scene.add(bulbModel);
 
 // To do
 // Add lights
-// Flickering animation
+// Flickering animation to firelight
 // Light in front of hearth
 // Cast shadows
 // Add animation that makes the light go off and shows lightning more pronounced

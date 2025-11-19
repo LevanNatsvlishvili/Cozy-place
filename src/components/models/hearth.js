@@ -1,6 +1,7 @@
 import gltfLoader from '@/utils/loader/gtlfLoader';
 import * as THREE from 'three';
 import loadVideo from '@/utils/loader/videoLoader';
+import gui from '@/utils/gui';
 
 const props = {
   scale: {
@@ -28,6 +29,35 @@ const hearth = async () => {
   model.rotateOnAxis(new THREE.Vector3(0, 1, 0), props.rotation);
   model.scale.set(props.scale.x, props.scale.y, props.scale.z);
   group.add(model);
+
+  // Firelight inside hearth
+  const fireLight = new THREE.PointLight(0xffa733, 1.6, 4, 2); // color, intensity, distance, decay
+  fireLight.position.x = -4;
+  fireLight.position.z = props.position.z;
+  fireLight.position.y = 1.2;
+  fireLight.castShadow = true;
+  fireLight.shadow.mapSize.set(512, 512);
+  fireLight.shadow.radius = 2; // softer edge
+  fireLight.intensity = 5;
+  fireLight.distance = 1;
+  fireLight.decay = 0.8;
+
+  fireLight.userData.baseIntensity = fireLight.intensity;
+  fireLight.userData.basePosition = fireLight.position.clone();
+  group.add(fireLight);
+
+  // Fire spotlight emitting from hearth outward
+  const fireSpot = new THREE.SpotLight(0xff8a3c, 2, 10, Math.PI / 4, 0.3, 2);
+  fireSpot.position.x = -4;
+  fireSpot.position.z = props.position.z;
+  fireSpot.position.y = 1.2;
+  fireSpot.target.position.set(-2.5, 1.5, 3);
+  fireSpot.intensity = 2.5;
+  fireSpot.distance = 12;
+  fireSpot.decay = 0.6;
+
+  group.add(fireSpot);
+  group.add(fireSpot.target);
 
   // Fire Animation
   const video = await loadVideo('/fire.mp4');
