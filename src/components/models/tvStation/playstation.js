@@ -28,19 +28,19 @@ const props = {
 
 const playstation = async (position) => {
   const group = new THREE.Group();
-  const console = await gltfLoader.loadAsync('./models/tv_station/ps5.glb');
+  const ps5 = await gltfLoader.loadAsync('./models/tv_station/ps5.glb');
   const controller = await gltfLoader.loadAsync('./models/tv_station/controller.glb');
 
   // Console
-  const consoleModel = console.scene;
+  const consoleModel = ps5.scene;
   consoleModel.position.x = position.x;
   consoleModel.position.z = props.position.console.z;
   consoleModel.position.y = props.position.console.y;
 
   consoleModel.traverse((child) => {
     if (child.isMesh) {
-      child.material.roughness = 0.7;
-      child.material.metalness = 0.75;
+      child.material.roughness = 0.4;
+      child.material.metalness = 0.3;
     }
   });
 

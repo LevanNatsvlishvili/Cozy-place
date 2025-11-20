@@ -14,6 +14,7 @@ import cat from './components/models/cat';
 import bulb from './components/models/bulb';
 import catBreathing from './utils/animations/catBreathing';
 import candleFlickering from './utils/animations/candleFlickering';
+import hearthFlickering from './utils/animations/hearthFlickering';
 
 /**
  * Base
@@ -56,12 +57,11 @@ scene.add(tvStationModel);
 scene.add(bulbModel);
 
 // To do
-// Add lights
-// Flickering animation to firelight
-// Light in front of hearth
 // Cast shadows
+// Can we make ligtning effect based on lightning ?
 // Add animation that makes the light go off and shows lightning more pronounced
 // Add loading screen while models are being loaded
+// When turning on light, add increase ambient light as well
 // Add click interaction to turn on/off lights and other elements
 
 /**
@@ -76,9 +76,9 @@ const tick = () => {
   //   catBreathing(catModel, clock);
   // }
 
-  if (tableModel) {
-    // console.log(tableModel);
-    candleFlickering(tableModel.userData.fireLight, et);
+  if (hearthModel) {
+    console.log(hearthModel.userData);
+    hearthFlickering(hearthModel.userData.fireSpot, et);
   }
 
   // Update controls

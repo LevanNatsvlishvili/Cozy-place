@@ -13,8 +13,6 @@ const bulb = async () => {
   const model = glb.scene;
   // console.log(model);
   model.traverse((child) => {
-    child.isMesh && console.log(child);
-
     if (child.isMesh && child.name === 'Bulb_A004_M_BulbGlass_0') {
       // Dark grey color
       child.material.color.setHex(0x2f3a3b);

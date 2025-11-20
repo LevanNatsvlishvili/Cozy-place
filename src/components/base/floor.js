@@ -42,5 +42,6 @@ const material = new THREE.MeshStandardMaterial({
 const floor = new THREE.Mesh(new THREE.PlaneGeometry(floorCoordinates.width, floorCoordinates.length), material);
 floor.rotation.x = Math.PI * 0.5;
 floor.position.z = floorCoordinates.length / 2;
+floor.receiveShadow = true;
 
 export default floor;

@@ -19,7 +19,7 @@ const cat = async () => {
 
   cat.traverse((child) => {
     if (child.isMesh) {
-      // child.castShadow = true;
+      child.castShadow = true;
       child.material.metalness = 0.8;
       child.material.roughness = 1;
       child.material.metalnessMap = null;
