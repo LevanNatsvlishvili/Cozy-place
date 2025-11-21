@@ -39,25 +39,23 @@ const table = async () => {
   group.add(model);
 
   const fireLight = new THREE.PointLight(0xffa733, 1.6, 4, 2); // color, intensity, distance, decay
-  // fireLight.position.set(0.625, 1.25, 3.02); // just in front of the fire plane
   fireLight.position.x = 0.5;
   fireLight.position.z = props.position.z;
   fireLight.position.y = 0.5;
-  // fireLight.castShadow = true;
   fireLight.shadow.mapSize.set(512, 512);
   fireLight.shadow.radius = 2; // softer edge
   fireLight.position.y = 1.1;
   fireLight.position.x = 0.51;
-  fireLight.intensity = 1.5;
-  fireLight.distance = 22;
-  fireLight.decay = 0.6;
+  fireLight.intensity = 0.5;
+  fireLight.distance = 8;
+  fireLight.decay = 1;
 
   fireLight.userData.baseIntensity = fireLight.intensity;
   fireLight.userData.basePosition = fireLight.position.clone();
 
-  gui.add(fireLight, 'intensity').min(0).max(5).step(0.01).name('Fire Light Intensity');
-  gui.add(fireLight, 'distance').min(0).max(20).step(0.01).name('Fire Light Distance');
-  gui.add(fireLight, 'decay').min(-5).max(5).step(0.01).name('Fire Light Decay');
+  // gui.add(fireLight, 'intensity').min(0).max(5).step(0.01).name('Fire Light Intensity');
+  // gui.add(fireLight, 'distance').min(0).max(20).step(0.01).name('Fire Light Distance');
+  // gui.add(fireLight, 'decay').min(-5).max(5).step(0.01).name('Fire Light Decay');
 
   // Candle Fire
   const video = await loadVideo('/candle_fire.mp4');

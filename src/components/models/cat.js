@@ -9,8 +9,8 @@ const props = {
 const cat = async () => {
   const catGlb = await gltfLoader.loadAsync('./models/cat.glb');
   const cat = catGlb.scene;
-  cat.position.x = -2.9;
-  cat.position.z = 3;
+  cat.position.x = -2.5;
+  cat.position.z = 3.25;
   cat.position.y = 0.15;
   cat.rotation.y = Math.PI / 5;
   cat.userData.originalY = cat.position.y; // store baseline Y
@@ -29,9 +29,9 @@ const cat = async () => {
     }
   });
 
-  gui.add(cat.position, 'x').min(-10).max(10).step(0.01).name('Cat X Position');
-  gui.add(cat.position, 'y').min(-10).max(10).step(0.01).name('Cat Y Position');
-  gui.add(cat.position, 'z').min(-10).max(10).step(0.01).name('Cat Z Position');
+  // gui.add(cat.position, 'x').min(-10).max(10).step(0.01).name('Cat X Position');
+  // gui.add(cat.position, 'y').min(-10).max(10).step(0.01).name('Cat Y Position');
+  // gui.add(cat.position, 'z').min(-10).max(10).step(0.01).name('Cat Z Position');
 
   cat.userData.originalScale = props.scale;
 

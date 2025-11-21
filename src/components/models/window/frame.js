@@ -39,9 +39,9 @@ const frame = async () => {
   });
 
   const lightningAnimation = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), lightningMaterial);
-  lightningAnimation.position.x = -3.03;
-  lightningAnimation.position.y = 3.35;
-  lightningAnimation.position.z = 0.09;
+  lightningAnimation.position.x = -3.05;
+  lightningAnimation.position.y = 3.4;
+  lightningAnimation.position.z = 0.1;
   lightningAnimation.scale.y = 2;
   lightningAnimation.scale.z = 1;
   lightningAnimation.scale.x = 2.38;
