@@ -11,7 +11,7 @@ const window = async () => {
   group.add(windowModel);
 
   group.position.x = 1;
-
+  group.userData = windowModel.userData;
   return group;
 };
 

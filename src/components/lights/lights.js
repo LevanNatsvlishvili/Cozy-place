@@ -6,7 +6,8 @@ import { colors } from '../base/consts/common';
 export const ambientLight = new THREE.AmbientLight(colors.light, 10);
 ambientLight.raycast = true;
 ambientLight.intensity = 0.5;
-// ambientLight.add(new THREE.AxesHelper(2));
+
+export const lightningAmbientLight = new THREE.AmbientLight('#ffffff', 0);
 
 gui.add(ambientLight, 'intensity').min(0).max(30).step(0.01).name('Ambient Light Intensity');
 

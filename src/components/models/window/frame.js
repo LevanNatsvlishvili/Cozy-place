@@ -46,12 +46,22 @@ const frame = async () => {
   lightningAnimation.scale.z = 1;
   lightningAnimation.scale.x = 2.38;
 
+  const canvas = document.createElement('canvas');
+  canvas.width = 32;
+  canvas.height = 18;
+  const ctx = canvas.getContext('2d');
+
+  lightningAnimation.userData.brightnessCanvas = canvas;
+  lightningAnimation.userData.brightnessCtx = ctx;
+  lightningAnimation.userData.video = video;
+
   // Opacity
   lightningAnimation.material.transparent = true;
   // lightningAnimation.material.opacity = 0.4;
   gui.add(lightningAnimation.material, 'opacity').min(0).max(1).step(0.01).name('lightning opacity');
 
   group.add(lightningAnimation);
+  group.userData.lightningLight = lightningAnimation;
 
   return group;
 };

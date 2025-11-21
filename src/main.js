@@ -3,7 +3,7 @@ import walls from './components/base/walls';
 import floor from './components/base/floor';
 import windowResizer from './utils/windowResizer';
 import { camera, renderer, controls } from './utils/renderer.js';
-import { ambientLight, directionalLight } from './components/lights/lights.js';
+import { ambientLight, directionalLight, lightningAmbientLight } from './components/lights/lights.js';
 import hearth from './components/models/hearth';
 import sofa from '@/components/models/sofa';
 import table from './components/models/table';
@@ -15,6 +15,7 @@ import bulb from './components/models/bulb';
 import catBreathing from './utils/animations/catBreathing';
 import candleFlickering from './utils/animations/candleFlickering';
 import hearthFlickering from './utils/animations/hearthFlickering';
+import updateLightningFromVideo from './utils/animations/lightningAnimation';
 
 /**
  * Base
@@ -23,10 +24,10 @@ import hearthFlickering from './utils/animations/hearthFlickering';
 
 // Scene
 const scene = new THREE.Scene();
-
 // Lights
 scene.add(ambientLight);
 scene.add(directionalLight);
+scene.add(lightningAmbientLight);
 
 // Camera
 scene.add(camera);
@@ -57,8 +58,9 @@ scene.add(tvStationModel);
 scene.add(bulbModel);
 
 // To do
-// Cast shadows
-// Can we make ligtning effect based on lightning ?
+// Check performance for lightning animation and optimize if needed
+// Check lower end devices for performance issues
+// Add more ambient sounds (rain, fireplace, occasional thunder)
 // Add animation that makes the light go off and shows lightning more pronounced
 // Add loading screen while models are being loaded
 // When turning on light, add increase ambient light as well
@@ -77,8 +79,12 @@ const tick = () => {
   // }
 
   if (hearthModel) {
-    console.log(hearthModel.userData);
     hearthFlickering(hearthModel.userData.fireSpot, et);
+  }
+
+  if (windowModel) {
+    // console.log(windowModel.userData);
+    updateLightningFromVideo(windowModel.userData.lightningLight, lightningAmbientLight);
   }
 
   // Update controls
