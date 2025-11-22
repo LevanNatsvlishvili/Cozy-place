@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import walls from './components/base/walls';
 import floor from './components/base/floor';
 import windowResizer from './utils/windowResizer';
-import { camera, renderer, controls, perf } from './utils/renderer.js';
+import { camera, renderer, controls, perf, scene } from './utils/renderer.js';
 import { ambientLight, directionalLight, lightningAmbientLight } from './components/lights/lights.js';
 import hearth from './components/models/hearth';
 import sofa from '@/components/models/sofa';
@@ -18,6 +18,8 @@ import hearthFlickering from './utils/animations/hearthFlickering';
 import updateLightningFromVideo from './utils/animations/lightningAnimation';
 
 import Stats from 'stats.js';
+import onClick from './utils/onClick';
+// import onClick from './utils/onClick';
 
 /**
  * Base
@@ -29,7 +31,6 @@ stats.showPanel(0); // FPS
 document.body.appendChild(stats.dom);
 
 // Scene
-const scene = new THREE.Scene();
 // Lights
 scene.add(ambientLight);
 scene.add(directionalLight);
@@ -41,26 +42,28 @@ scene.add(camera);
 // Resizes window every time the window size changes
 windowResizer(camera, renderer);
 
+// onClick(renderer, camera, scene);
+
 // Base
 scene.add(floor);
 scene.add(walls);
 
 // Models
-const hearthModel = await hearth(); // 1.9mb
-const catModel = await cat(); // 1.9mb
-const sofaModel = await sofa(); // 1.7mb
-const tableModel = await table(); // 2.3mb
-const shelfModel = await shelf(); // 3.4mb
-const windowModel = await windowFrame(); // 3mb
-const tvStationModel = await tvStation();
+// const hearthModel = await hearth(); // 1.9mb
+// const catModel = await cat(); // 1.9mb
+// const sofaModel = await sofa(); // 1.7mb
+// const tableModel = await table(); // 2.3mb
+// const shelfModel = await shelf(); // 3.4mb
+// const windowModel = await windowFrame(); // 3mb
+// const tvStationModel = await tvStation();
 const bulbModel = await bulb();
-scene.add(hearthModel); // 600 ms
-scene.add(catModel);
-scene.add(sofaModel); // 500ms
-scene.add(tableModel); // 500
-scene.add(shelfModel); // 2300ms
-scene.add(windowModel); // 500
-scene.add(tvStationModel);
+// scene.add(hearthModel); // 600 ms
+// scene.add(catModel);
+// scene.add(sofaModel); // 500ms
+// scene.add(tableModel); // 500
+// scene.add(shelfModel); // 2300ms
+// scene.add(windowModel); // 500
+// scene.add(tvStationModel);
 scene.add(bulbModel);
 
 // To do
@@ -71,6 +74,7 @@ scene.add(bulbModel);
 // When turning on light, add increase ambient light as well
 // Add click interaction to turn on/off lights and other elements
 // Lets change animation with GSAP, if possible linkedin page will reshare it.
+// Jagged edges, on window frame, and potentially other models
 /**
  * Animate
  */
@@ -107,19 +111,19 @@ const tick = (now) => {
 
   const t = clock.getElapsedTime(); // seconds since start
 
-  if (now - lastLowTime >= lowFrameDuration) {
-    if (catModel) {
-      lastLowTime = now;
-      catBreathing(catModel, t);
-    }
-    if (hearthModel) {
-      hearthFlickering(hearthModel.userData.fireSpot, t);
-    }
-  }
+  // if (now - lastLowTime >= lowFrameDuration) {
+  //   if (catModel) {
+  //     lastLowTime = now;
+  //     catBreathing(catModel, t);
+  //   }
+  //   if (hearthModel) {
+  //     hearthFlickering(hearthModel.userData.fireSpot, t);
+  //   }
+  // }
 
-  if (windowModel) {
-    updateLightningFromVideo(windowModel.userData.lightningLight, lightningAmbientLight);
-  }
+  // if (windowModel) {
+  //   updateLightningFromVideo(windowModel.userData.lightningLight, lightningAmbientLight);
+  // }
 
   const info = renderer.info;
   perf.calls = info.render.calls;

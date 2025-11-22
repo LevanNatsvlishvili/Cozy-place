@@ -62,11 +62,6 @@ const hearth = async () => {
   fireSpot.userData.basePosition = fireSpot.position.clone();
   fireSpot.userData.baseTarget = fireSpot.target.position.clone();
 
-  gui.add(fireSpot, 'intensity').min(0).max(5).step(0.01).name('Fire Spot Intensity');
-  gui.add(fireSpot, 'distance').min(0).max(20).step(0.01).name('Fire Spot Distance');
-  gui.add(fireSpot, 'decay').min(-5).max(5).step(0.01).name('Fire Spot Decay');
-  // expose it so main loop can access
-
   group.add(fireSpot);
   group.add(fireSpot.target);
   group.userData.fireSpot = fireSpot;

@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { screenSizes } from './windowResizer';
 import gui from './gui';
+export const scene = new THREE.Scene();
 
 export const canvas = document.querySelector('canvas.webgl');
 
@@ -52,3 +53,30 @@ debugFolder.add(perf, 'calls').name('Draw Calls').listen();
 debugFolder.add(perf, 'triangles').name('Triangles').listen();
 debugFolder.add(perf, 'geometries').name('Geometries').listen();
 debugFolder.add(perf, 'textures').name('Textures').listen();
+
+// Click handler
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+
+window.addEventListener('pointerdown', onClick);
+
+function onClick(event) {
+  // Convert mouse to -1..1 NDC space
+  const rect = renderer.domElement.getBoundingClientRect();
+  mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+  mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+  // Raycast from camera through mouse
+  raycaster.setFromCamera(mouse, camera);
+
+  // Check all objects in scene
+  const intersects = raycaster.intersectObjects(scene.children, true);
+
+  if (intersects.length > 0) {
+    const clicked = intersects[0].object;
+
+    console.log('Clicked object:', clicked.name);
+
+    // handleModelClick(clicked);
+  }
+}

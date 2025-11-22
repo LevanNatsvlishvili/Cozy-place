@@ -4,7 +4,7 @@ import { colors, shadow } from '../base/consts/common';
 
 // Ambient light
 export const ambientLight = new THREE.AmbientLight(colors.light, 10);
-ambientLight.raycast = true;
+// ambientLight.raycast = true;
 ambientLight.intensity = 0.5;
 
 export const lightningAmbientLight = new THREE.AmbientLight('#ffffff', 0);
