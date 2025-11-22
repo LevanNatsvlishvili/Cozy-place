@@ -19,7 +19,7 @@ const frame = async () => {
   windowModel.traverse((child) => {
     if (child.isMesh && child.name === 'Glass_Glass01_0') {
       child.material.transparent = true;
-      child.material.opacity = 0.25;
+      child.material.opacity = 0.4;
     }
   });
 
@@ -57,7 +57,7 @@ const frame = async () => {
 
   // Opacity
   lightningAnimation.material.transparent = true;
-  // lightningAnimation.material.opacity = 0.4;
+  lightningAnimation.material.opacity = 0.4;
   gui.add(lightningAnimation.material, 'opacity').min(0).max(1).step(0.01).name('lightning opacity');
 
   group.add(lightningAnimation);

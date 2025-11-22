@@ -29,3 +29,8 @@ export const backWallCoordinates = {
 export const colors = {
   light: '#ffd27f',
 };
+
+export const shadow = {
+  mapSize: { width: 1024, height: 1024 },
+  // camera: { near: 0.5, far: 500, fov: 30 },
+};

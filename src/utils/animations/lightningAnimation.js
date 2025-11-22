@@ -6,7 +6,6 @@ function updateLightningFromVideo(light, ambientLight) {
   const ctx = light.userData.brightnessCtx;
 
   if (!video || !ctx || video.readyState < 2) return;
-  console.log(light);
 
   // Draw current video frame into tiny canvas
   ctx.drawImage(video, 0, 0, canvas.width, canvas.height);

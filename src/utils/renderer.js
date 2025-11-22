@@ -38,3 +38,17 @@ renderer.setSize(screenSizes.width, screenSizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+const debugFolder = gui.addFolder('Performance');
+
+export const perf = {
+  calls: 0,
+  triangles: 0,
+  geometries: 0,
+  textures: 0,
+};
+
+debugFolder.add(perf, 'calls').name('Draw Calls').listen();
+debugFolder.add(perf, 'triangles').name('Triangles').listen();
+debugFolder.add(perf, 'geometries').name('Geometries').listen();
+debugFolder.add(perf, 'textures').name('Textures').listen();

@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import gui from '@/utils/gui.js';
-import { colors } from '../base/consts/common';
+import { colors, shadow } from '../base/consts/common';
 
 // Ambient light
 export const ambientLight = new THREE.AmbientLight(colors.light, 10);
@@ -21,8 +21,8 @@ directionalLight.position.set(-1.5, 2, -8);
 // gui.add(directionalLight, 'intensity').min(0).max(10).step(0.01).name('Directional Light Intensity');
 
 // Light optimization
-directionalLight.shadow.mapSize.width = 256;
-directionalLight.shadow.mapSize.height = 256;
+directionalLight.shadow.mapSize.width = shadow.mapSize.width;
+directionalLight.shadow.mapSize.height = shadow.mapSize.height;
 directionalLight.shadow.camera.top = 8;
 directionalLight.shadow.camera.right = 8;
 directionalLight.shadow.camera.bottom = -8;

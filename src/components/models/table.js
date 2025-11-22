@@ -2,6 +2,7 @@ import gltfLoader from '@/utils/loader/gtlfLoader';
 import gui from '@/utils/gui';
 import * as THREE from 'three';
 import loadVideo from '@/utils/loader/videoLoader';
+import { shadow } from '../base/consts/common';
 
 const props = {
   scale: 1.5,
@@ -42,7 +43,7 @@ const table = async () => {
   fireLight.position.x = 0.5;
   fireLight.position.z = props.position.z;
   fireLight.position.y = 0.5;
-  fireLight.shadow.mapSize.set(512, 512);
+  fireLight.shadow.mapSize.set(shadow.mapSize.width, shadow.mapSize.height);
   fireLight.shadow.radius = 2; // softer edge
   fireLight.position.y = 1.1;
   fireLight.position.x = 0.51;
