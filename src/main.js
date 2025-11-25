@@ -25,6 +25,7 @@ import onClick from './utils/onClick';
  * Base
  */
 // Debug
+const clickableObjects = [];
 
 const stats = new Stats();
 stats.showPanel(0); // FPS
@@ -42,39 +43,42 @@ scene.add(camera);
 // Resizes window every time the window size changes
 windowResizer(camera, renderer);
 
-// onClick(renderer, camera, scene);
-
 // Base
 scene.add(floor);
 scene.add(walls);
 
 // Models
-// const hearthModel = await hearth(); // 1.9mb
-// const catModel = await cat(); // 1.9mb
-// const sofaModel = await sofa(); // 1.7mb
-// const tableModel = await table(); // 2.3mb
-// const shelfModel = await shelf(); // 3.4mb
-// const windowModel = await windowFrame(); // 3mb
-// const tvStationModel = await tvStation();
+const hearthModel = await hearth(); // 1.9mb
+const catModel = await cat(); // 1.9mb
+const sofaModel = await sofa(); // 1.7mb
+const tableModel = await table(); // 2.3mb
+const shelfModel = await shelf(); // 3.4mb
+const windowModel = await windowFrame(); // 3mb
+const tvStationModel = await tvStation();
 const bulbModel = await bulb();
-// scene.add(hearthModel); // 600 ms
-// scene.add(catModel);
-// scene.add(sofaModel); // 500ms
-// scene.add(tableModel); // 500
-// scene.add(shelfModel); // 2300ms
-// scene.add(windowModel); // 500
-// scene.add(tvStationModel);
+scene.add(hearthModel); // 600 ms
+scene.add(catModel);
+scene.add(sofaModel); // 500ms
+scene.add(tableModel); // 500
+scene.add(shelfModel); // 2300ms
+scene.add(windowModel); // 500
+scene.add(tvStationModel);
 scene.add(bulbModel);
+clickableObjects.push(bulbModel);
+
+const onClickHandler = onClick(renderer, camera, clickableObjects);
+window.addEventListener('pointerdown', onClickHandler);
 
 // To do
-// Check lower end devices for performance issues
+
 // Add more ambient sounds (rain, fireplace, occasional thunder)
-// Add animation that makes the light go off and shows lightning more pronounced
 // Add loading screen while models are being loaded
 // When turning on light, add increase ambient light as well
 // Add click interaction to turn on/off lights and other elements
 // Lets change animation with GSAP, if possible linkedin page will reshare it.
 // Jagged edges, on window frame, and potentially other models
+// Record a video
+
 /**
  * Animate
  */

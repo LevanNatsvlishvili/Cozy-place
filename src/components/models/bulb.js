@@ -13,9 +13,9 @@ const bulb = async () => {
   const model = glb.scene;
   const defaultBulbSettings = {};
   model.traverse((child) => {
-    child.name = 'Bulb';
     if (child.isMesh && child.name === 'Bulb_A004_M_BulbGlass_0') {
       // Save default settings
+      child.name = 'Bulb-glass';
       defaultBulbSettings.color = child.material.color.getHex();
       defaultBulbSettings.emissive = child.material.emissive.getHex();
       defaultBulbSettings.emissiveIntensity = child.material.emissiveIntensity;
@@ -83,7 +83,7 @@ const bulb = async () => {
   group.add(model);
   group.add(bulbLight);
   group.userData.toggleBulb = actions.toggleBulbLight;
-
+  group.name = 'Bulb';
   return group;
 };
 
