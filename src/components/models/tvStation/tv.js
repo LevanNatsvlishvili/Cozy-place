@@ -2,6 +2,7 @@ import gui from '@/utils/gui';
 import gltfLoader from '@/utils/loader/gtlfLoader';
 import textureLoader from '@/utils/loader/textureLoader';
 import * as THREE from 'three';
+import { gsap } from 'gsap';
 
 const props = {
   scale: 3,
@@ -46,9 +47,39 @@ const tv = async () => {
   tvScreen.position.y = props.position.y - 0.08;
   tvScreen.scale.set(props.scale, props.scale, props.scale);
   tvScreen.rotation.y = Math.PI / 2;
+  tvScreen.name = 'TV-Screen';
+  tvScreen.material.transparent = true;
+
+  const actions = {
+    switchOn: () => {
+      gsap.to(tvScreen.material, {
+        opacity: 1,
+        duration: 0.2,
+        ease: 'power2.out',
+      });
+    },
+    switchOff: () => {
+      gsap.to(tvScreen.material, {
+        opacity: 0,
+        duration: 0.2,
+        ease: 'power2.in',
+      });
+    },
+    toggleTV: () => {
+      if (tvScreen.material.opacity === 1) {
+        actions.switchOff();
+      } else {
+        actions.switchOn();
+      }
+    },
+  };
 
   group.add(model);
   group.add(tvScreen);
+  group.name = 'TV';
+  group.userData = {
+    toggleTV: actions.toggleTV,
+  };
   return group;
 };
 

@@ -9,7 +9,8 @@ function handleModelClick(obj, name) {
     obj.toggleBulb();
   }
 
-  if (obj.name === 'WindowPane') {
+  if (name.includes('TV')) {
+    obj.toggleTV();
     // actions.openWindow();
   }
 }
@@ -42,3 +43,21 @@ export function createClickHandler(renderer, camera, clickableObjects) {
 }
 
 export default createClickHandler;
+
+let pointerDownPos = { x: 0, y: 0 };
+const CLICK_THRESHOLD = 5; // px
+
+export function pointerdownHandler(event) {
+  pointerDownPos.x = event.clientX;
+  pointerDownPos.y = event.clientY;
+}
+
+export function pointerupHandler(event, onClickHandler) {
+  const dx = event.clientX - pointerDownPos.x;
+  const dy = event.clientY - pointerDownPos.y;
+  const dist = Math.sqrt(dx * dx + dy * dy);
+
+  if (dist < CLICK_THRESHOLD) {
+    onClickHandler(event);
+  }
+}

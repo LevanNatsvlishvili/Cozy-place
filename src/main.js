@@ -18,7 +18,7 @@ import hearthFlickering from './utils/animations/hearthFlickering';
 import updateLightningFromVideo from './utils/animations/lightningAnimation';
 
 import Stats from 'stats.js';
-import onClick from './utils/onClick';
+import onClick, { pointerdownHandler, pointerupHandler } from './utils/catchClickOnObjectHandler';
 // import onClick from './utils/onClick';
 
 /**
@@ -64,10 +64,16 @@ scene.add(shelfModel); // 2300ms
 scene.add(windowModel); // 500
 scene.add(tvStationModel);
 scene.add(bulbModel);
+
+const tv = tvStationModel.children.find((child) => child.name === 'TV');
 clickableObjects.push(bulbModel);
+clickableObjects.push(tv);
+// clickableObjects.push(tvStationModel);
+console.log();
 
 const onClickHandler = onClick(renderer, camera, clickableObjects);
-window.addEventListener('pointerdown', onClickHandler);
+window.addEventListener('pointerdown', pointerdownHandler);
+window.addEventListener('pointerup', (e) => pointerupHandler(e, onClickHandler));
 
 // To do
 
@@ -77,6 +83,7 @@ window.addEventListener('pointerdown', onClickHandler);
 // Add click interaction to turn on/off lights and other elements
 // Lets change animation with GSAP, if possible linkedin page will reshare it.
 // Jagged edges, on window frame, and potentially other models
+// Give background a very subtle texture to avoid pure black
 // Record a video
 
 /**
