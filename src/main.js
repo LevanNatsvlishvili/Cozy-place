@@ -49,26 +49,27 @@ scene.add(walls);
 
 // Models
 const hearthModel = await hearth(); // 1.9mb
-const catModel = await cat(); // 1.9mb
-const sofaModel = await sofa(); // 1.7mb
-const tableModel = await table(); // 2.3mb
-const shelfModel = await shelf(); // 3.4mb
-const windowModel = await windowFrame(); // 3mb
-const tvStationModel = await tvStation();
-const bulbModel = await bulb();
+// const catModel = await cat(); // 1.9mb
+// const sofaModel = await sofa(); // 1.7mb
+// const tableModel = await table(); // 2.3mb
+// const shelfModel = await shelf(); // 3.4mb
+// const windowModel = await windowFrame(); // 3mb
+// const tvStationModel = await tvStation();
+// const bulbModel = await bulb();
 scene.add(hearthModel); // 600 ms
-scene.add(catModel);
-scene.add(sofaModel); // 500ms
-scene.add(tableModel); // 500
-scene.add(shelfModel); // 2300ms
-scene.add(windowModel); // 500
-scene.add(tvStationModel);
-scene.add(bulbModel);
+// scene.add(catModel);
+// scene.add(sofaModel); // 500ms
+// scene.add(tableModel); // 500
+// scene.add(shelfModel); // 2300ms
+// scene.add(windowModel); // 500
+// scene.add(tvStationModel);
+// scene.add(bulbModel);
 
-const tv = tvStationModel.children.find((child) => child.name === 'TV');
-bulbModel.userData.ambientLight = ambientLight;
-clickableObjects.push(bulbModel);
-clickableObjects.push(tv);
+// const tv = tvStationModel.children.find((child) => child.name === 'TV');
+// bulbModel.userData.ambientLight = ambientLight;
+// clickableObjects.push(bulbModel);
+// clickableObjects.push(tv);
+clickableObjects.push(hearthModel);
 // clickableObjects.push(tvStationModel);
 
 const onClickHandler = onClick(renderer, camera, clickableObjects);
@@ -77,7 +78,6 @@ window.addEventListener('pointerup', (e) => pointerupHandler(e, onClickHandler))
 
 // // To do
 
-// Fireplace turn on/off
 // Candle on table turn on/off
 // Add more ambient sounds (rain, fireplace, occasional thunder)
 // Add loading screen while models are being loaded

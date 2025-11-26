@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import loadVideo from '@/utils/loader/videoLoader';
 import gui from '@/utils/gui';
 import { shadow } from '../base/consts/common';
+import { gsap } from 'gsap';
 
 const props = {
   scale: {
@@ -20,15 +21,19 @@ const props = {
 
 const hearth = async () => {
   const group = new THREE.Group();
+  group.name = 'Hearth';
 
   // Hearth model
   const glb = await gltfLoader.loadAsync('./models/hearth_2.glb');
   const model = glb.scene;
+  model.name = 'Hearth-Model';
+  model.children[0].name = 'Hearth-Model';
   model.position.x = props.position.x;
   model.position.z = props.position.z;
   model.position.y = props.position.y;
   model.rotateOnAxis(new THREE.Vector3(0, 1, 0), props.rotation);
   model.scale.set(props.scale.x, props.scale.y, props.scale.z);
+  console.log(model);
   group.add(model);
 
   // Firelight inside hearth
@@ -45,6 +50,7 @@ const hearth = async () => {
 
   fireLight.userData.baseIntensity = fireLight.intensity;
   fireLight.userData.basePosition = fireLight.position.clone();
+  fireLight.name = 'Hearth-Fire-Light';
   group.add(fireLight);
 
   // Fire spotlight emitting from hearth outward
@@ -61,6 +67,7 @@ const hearth = async () => {
   fireSpot.userData.baseIntensity = fireSpot.intensity;
   fireSpot.userData.basePosition = fireSpot.position.clone();
   fireSpot.userData.baseTarget = fireSpot.target.position.clone();
+  fireSpot.name = 'Hearth-Fire-Spot';
 
   group.add(fireSpot);
   group.add(fireSpot.target);
@@ -89,9 +96,90 @@ const hearth = async () => {
   fireAnimation.scale.z = 2;
   fireAnimation.scale.x = 1.3;
   fireAnimation.rotation.y = props.rotation;
+  fireAnimation.name = 'Hearth-Fire-Animation';
+
+  let isFireOn = true;
+
+  const actions = {
+    switchOn: () => {
+      if (isFireOn) return;
+      isFireOn = true;
+
+      // kill any previous tweens on these targets
+      gsap.killTweensOf([fireAnimation.material, fireLight, fireSpot]);
+
+      fireAnimation.visible = true;
+      fireAnimation.material.transparent = true;
+
+      gsap.to(fireAnimation.material, {
+        opacity: 1,
+        duration: 1.5,
+        ease: 'power2.out',
+        overwrite: 'auto',
+      });
+
+      fireLight.visible = true;
+      gsap.to(fireLight, {
+        intensity: fireLight.userData.baseIntensity,
+        duration: 1.5,
+        ease: 'power2.out',
+        overwrite: 'auto',
+      });
+      gsap.to(fireSpot, {
+        intensity: fireSpot.userData.baseIntensity,
+        duration: 1.5,
+        ease: 'power2.out',
+        overwrite: 'auto',
+      });
+    },
+
+    switchOff: () => {
+      if (!isFireOn) return;
+      isFireOn = false;
+
+      gsap.killTweensOf([fireAnimation.material, fireLight, fireSpot]);
+
+      gsap.to(fireAnimation.material, {
+        opacity: 0,
+        duration: 0.2,
+        ease: 'power2.in',
+        overwrite: 'auto',
+        onComplete: () => {
+          fireAnimation.visible = false;
+        },
+      });
+
+      gsap.to(fireLight, {
+        intensity: 0,
+        duration: 0.2,
+        ease: 'power2.in',
+        overwrite: 'auto',
+        onComplete: () => {
+          fireLight.visible = false;
+        },
+      });
+      gsap.to(fireSpot, {
+        intensity: 0,
+        duration: 0.2,
+        ease: 'power2.in',
+        overwrite: 'auto',
+        onComplete: () => {
+          fireSpot.visible = false;
+        },
+      });
+    },
+    toggleFire: () => {
+      if (isFireOn) {
+        actions.switchOff();
+      } else {
+        actions.switchOn();
+      }
+    },
+  };
 
   group.add(fireAnimation);
-
+  group.userData.toggleFire = actions.toggleFire;
+  console.log(group);
   return group;
 };
 

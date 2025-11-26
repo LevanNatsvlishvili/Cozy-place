@@ -11,7 +11,11 @@ function handleModelClick(obj, name) {
 
   if (name.includes('TV')) {
     obj.toggleTV();
-    // actions.openWindow();
+  }
+
+  if (name.includes('Hearth')) {
+    console.log(obj);
+    obj.toggleFire();
   }
 }
 
@@ -36,7 +40,8 @@ export function createClickHandler(renderer, camera, clickableObjects) {
     if (intersects.length > 0) {
       const clicked = intersects[0].object;
       const clickedFunc = targets.find((target) => clicked.name.includes(target.name));
-
+      console.log(clicked);
+      console.log(clickedFunc);
       handleModelClick(clickedFunc.userData, clicked.name);
     }
   };
