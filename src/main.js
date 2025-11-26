@@ -65,10 +65,10 @@ scene.add(windowModel); // 500
 scene.add(tvStationModel);
 scene.add(bulbModel);
 
-// const tv = tvStationModel.children.find((child) => child.name === 'TV');
+const tv = tvStationModel.children.find((child) => child.name === 'TV');
 bulbModel.userData.ambientLight = ambientLight;
 clickableObjects.push(bulbModel);
-// clickableObjects.push(tv);
+clickableObjects.push(tv);
 // clickableObjects.push(tvStationModel);
 
 const onClickHandler = onClick(renderer, camera, clickableObjects);

@@ -50,6 +50,17 @@ const tv = async () => {
   tvScreen.name = 'TV-Screen';
   tvScreen.material.transparent = true;
 
+  const tvLightIntensity = 5;
+  const tvLight = new THREE.PointLight('#207d9d');
+  tvLight.position.x = -3;
+  tvLight.position.y = 1.3;
+  tvLight.position.z = props.position.z;
+  tvLight.intensity = tvLightIntensity;
+  tvLight.distance = 10;
+  tvLight.decay = 0.8;
+
+  group.add(tvLight);
+
   const actions = {
     switchOn: () => {
       gsap.to(tvScreen.material, {
@@ -57,10 +68,20 @@ const tv = async () => {
         duration: 0.2,
         ease: 'power2.out',
       });
+      gsap.to(tvLight, {
+        intensity: tvLightIntensity,
+        duration: 0.2,
+        ease: 'power2.out',
+      });
     },
     switchOff: () => {
       gsap.to(tvScreen.material, {
         opacity: 0,
+        duration: 0.2,
+        ease: 'power2.in',
+      });
+      gsap.to(tvLight, {
+        intensity: 0,
         duration: 0.2,
         ease: 'power2.in',
       });
