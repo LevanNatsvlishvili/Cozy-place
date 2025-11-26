@@ -61,33 +61,63 @@ const tv = async () => {
 
   group.add(tvLight);
 
+  let tvIsOn = true;
+
   const actions = {
     switchOn: () => {
+      if (tvIsOn) return;
+      tvIsOn = true;
+
+      // kill any previous tweens on these targets
+      gsap.killTweensOf([tvScreen.material, tvLight]);
+
+      tvScreen.visible = true;
+      tvScreen.material.transparent = true;
+
       gsap.to(tvScreen.material, {
         opacity: 1,
         duration: 0.2,
         ease: 'power2.out',
+        overwrite: 'auto',
       });
+
+      tvLight.visible = true;
       gsap.to(tvLight, {
         intensity: tvLightIntensity,
         duration: 0.2,
         ease: 'power2.out',
+        overwrite: 'auto',
       });
     },
+
     switchOff: () => {
+      if (!tvIsOn) return;
+      tvIsOn = false;
+
+      gsap.killTweensOf([tvScreen.material, tvLight]);
+
       gsap.to(tvScreen.material, {
         opacity: 0,
         duration: 0.2,
         ease: 'power2.in',
+        overwrite: 'auto',
+        onComplete: () => {
+          tvScreen.visible = false;
+        },
       });
+
       gsap.to(tvLight, {
         intensity: 0,
         duration: 0.2,
         ease: 'power2.in',
+        overwrite: 'auto',
+        onComplete: () => {
+          tvLight.visible = false;
+        },
       });
     },
     toggleTV: () => {
-      if (tvScreen.material.opacity === 1) {
+      if (tvIsOn) {
         actions.switchOff();
       } else {
         actions.switchOn();

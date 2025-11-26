@@ -77,13 +77,14 @@ window.addEventListener('pointerup', (e) => pointerupHandler(e, onClickHandler))
 
 // // To do
 
+// Fireplace turn on/off
+// Candle on table turn on/off
 // Add more ambient sounds (rain, fireplace, occasional thunder)
 // Add loading screen while models are being loaded
-// When turning on light, add increase ambient light as well
-// Add click interaction to turn on/off lights and other elements
 // Lets change animation with GSAP, if possible linkedin page will reshare it.
 // Jagged edges, on window frame, and potentially other models
 // Give background a very subtle texture to avoid pure black
+// Test with low end device, like Lika or phone
 // Record a video
 
 /**
