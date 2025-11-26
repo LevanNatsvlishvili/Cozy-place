@@ -40,7 +40,7 @@ const bulb = async () => {
   const actions = {
     switchLightOn: () => {
       model.traverse((child) => {
-        if (child.isMesh && child.name === 'Bulb_A004_M_BulbGlass_0') {
+        if (child.isMesh && child.name === 'Bulb-glass') {
           child.material.color.setHex(0x2f3a3b);
           child.material.emissive.set('#ffd27f');
           child.material.emissiveIntensity = 2;
@@ -55,7 +55,7 @@ const bulb = async () => {
     },
     switchLightOff: () => {
       model.traverse((child) => {
-        if (child.isMesh && child.name === 'Bulb_A004_M_BulbGlass_0') {
+        if (child.isMesh && child.name === 'Bulb-glass') {
           child.material.color.setHex(defaultBulbSettings.color);
           child.material.emissive.setHex(defaultBulbSettings.emissive);
           child.material.emissiveIntensity = defaultBulbSettings.emissiveIntensity;
@@ -68,11 +68,13 @@ const bulb = async () => {
       });
       bulbLight.visible = false;
     },
-    toggleBulbLight: () => {
+    toggleBulbLight: (ambientLight) => {
       if (bulbLight.visible) {
         actions.switchLightOff();
+        ambientLight.intensity = 0.5;
       } else {
         actions.switchLightOn();
+        ambientLight.intensity = 5;
       }
     },
   };

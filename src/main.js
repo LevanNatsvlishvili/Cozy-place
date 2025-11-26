@@ -65,17 +65,17 @@ scene.add(windowModel); // 500
 scene.add(tvStationModel);
 scene.add(bulbModel);
 
-const tv = tvStationModel.children.find((child) => child.name === 'TV');
+// const tv = tvStationModel.children.find((child) => child.name === 'TV');
+bulbModel.userData.ambientLight = ambientLight;
 clickableObjects.push(bulbModel);
-clickableObjects.push(tv);
+// clickableObjects.push(tv);
 // clickableObjects.push(tvStationModel);
-console.log();
 
 const onClickHandler = onClick(renderer, camera, clickableObjects);
 window.addEventListener('pointerdown', pointerdownHandler);
 window.addEventListener('pointerup', (e) => pointerupHandler(e, onClickHandler));
 
-// To do
+// // To do
 
 // Add more ambient sounds (rain, fireplace, occasional thunder)
 // Add loading screen while models are being loaded

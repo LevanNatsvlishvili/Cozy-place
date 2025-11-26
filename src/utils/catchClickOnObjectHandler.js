@@ -6,7 +6,7 @@ const mouse = new THREE.Vector2();
 
 function handleModelClick(obj, name) {
   if (name.includes('Bulb')) {
-    obj.toggleBulb();
+    obj.toggleBulb(obj.ambientLight);
   }
 
   if (name.includes('TV')) {

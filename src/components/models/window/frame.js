@@ -57,7 +57,10 @@ const frame = async () => {
 
   // Opacity
   lightningAnimation.material.transparent = true;
-  lightningAnimation.material.opacity = 0.4;
+  // lightningAnimation.material.opacity = 0.4;
+  lightningMaterial.color.setScalar(0.25); // 0 = black, 1 = normal
+
+  // gui.add(lightningAnimation.material.color, 'r').min(0).max(1).step(0.001).name('lightning brightness');
   gui.add(lightningAnimation.material, 'opacity').min(0).max(1).step(0.01).name('lightning opacity');
 
   group.add(lightningAnimation);
