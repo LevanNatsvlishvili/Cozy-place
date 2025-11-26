@@ -119,6 +119,8 @@ const hearth = async () => {
       });
 
       fireLight.visible = true;
+      fireSpot.visible = true;
+
       gsap.to(fireLight, {
         intensity: fireLight.userData.baseIntensity,
         duration: 1.5,
