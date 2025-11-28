@@ -143,7 +143,7 @@ const hearth = async () => {
 
       gsap.to(fireAnimation.material, {
         opacity: 0,
-        duration: 0.2,
+        duration: 0.5,
         ease: 'power2.in',
         overwrite: 'auto',
         onComplete: () => {
@@ -153,7 +153,7 @@ const hearth = async () => {
 
       gsap.to(fireLight, {
         intensity: 0,
-        duration: 0.2,
+        duration: 0.5,
         ease: 'power2.in',
         overwrite: 'auto',
         onComplete: () => {
@@ -162,7 +162,7 @@ const hearth = async () => {
       });
       gsap.to(fireSpot, {
         intensity: 0,
-        duration: 0.2,
+        duration: 0.5,
         ease: 'power2.in',
         overwrite: 'auto',
         onComplete: () => {

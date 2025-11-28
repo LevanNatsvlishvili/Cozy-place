@@ -14,7 +14,10 @@ function handleModelClick(obj, name) {
   }
 
   if (name.includes('Hearth')) {
-    console.log(obj);
+    obj.toggleFire();
+  }
+
+  if (name.includes('table')) {
     obj.toggleFire();
   }
 }

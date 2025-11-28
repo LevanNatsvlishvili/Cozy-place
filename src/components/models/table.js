@@ -3,6 +3,7 @@ import gui from '@/utils/gui';
 import * as THREE from 'three';
 import loadVideo from '@/utils/loader/videoLoader';
 import { shadow } from '../base/consts/common';
+import { gsap } from 'gsap';
 
 const props = {
   scale: 1.5,
@@ -15,8 +16,10 @@ const table = async () => {
   const group = new THREE.Group();
   const glb = await gltfLoader.loadAsync('./models/table.glb');
   const model = glb.scene;
+  model.name = 'table-model';
   model.traverse((child) => {
     if (child.isMesh) {
+      child.name = 'table-mesh';
       child.castShadow = true;
       child.receiveShadow = true;
       if (child.material.map) {
@@ -83,10 +86,127 @@ const table = async () => {
   fireAnimation.scale.z = 2;
   fireAnimation.scale.x = 0.6;
   fireAnimation.rotation.y = Math.PI / 4;
+  fireAnimation.name = 'table-candle-fire';
   group.userData.fireLight = fireLight;
   group.add(fireAnimation);
 
-  // group.position.z = 5
+  // 🔹 store base values for grow-from-bottom animation
+  fireAnimation.userData.baseScale = fireAnimation.scale.clone();
+  fireAnimation.userData.basePositionY = fireAnimation.position.y;
+  // plane height is 1, so world height = scale.y * 1
+  fireAnimation.userData.height = fireAnimation.userData.baseScale.y * 1.0;
+
+  let isFireOn = true;
+
+  // helper to keep bottom anchored while scaling
+  const updateFirePositionFromScale = () => {
+    const baseScaleY = fireAnimation.userData.baseScale.y;
+    const baseY = fireAnimation.userData.basePositionY;
+    const height = fireAnimation.userData.height;
+
+    const s = fireAnimation.scale.y / baseScaleY; // 0 → 1
+    // move center so bottom stays at same world Y
+    fireAnimation.position.y = baseY - (1 - s) * (height * 0.5);
+  };
+
+  const actions = {
+    switchOn: () => {
+      if (isFireOn) return;
+      isFireOn = true;
+
+      // kill any previous tweens on these targets
+      gsap.killTweensOf([fireAnimation.scale, fireLight]);
+
+      fireAnimation.visible = true;
+
+      const baseScaleY = fireAnimation.userData.baseScale.y;
+
+      // start from flat (no height)
+      fireAnimation.scale.y = 0.0001;
+      updateFirePositionFromScale();
+
+      gsap.to(fireAnimation.scale, {
+        y: baseScaleY,
+        duration: 1.5,
+        ease: 'power2.out',
+        overwrite: 'auto',
+        onUpdate: updateFirePositionFromScale,
+      });
+
+      gsap.to(fireAnimation.material, {
+        delay: 0.2,
+        opacity: 1,
+        duration: 1,
+        ease: 'power2.out',
+        overwrite: 'auto',
+        onUpdate: updateFirePositionFromScale,
+      });
+
+      fireLight.visible = true;
+
+      gsap.to(fireLight, {
+        delay: 0.25,
+        intensity: fireLight.userData.baseIntensity,
+        duration: 0.8,
+        ease: 'power2.out',
+        overwrite: 'auto',
+      });
+    },
+
+    switchOff: () => {
+      if (!isFireOn) return;
+      isFireOn = false;
+
+      gsap.killTweensOf([fireAnimation.scale, fireLight]);
+
+      const baseScaleY = fireAnimation.userData.baseScale.y;
+
+      gsap.to(fireAnimation.scale, {
+        y: 0.0001,
+        duration: 0.6,
+        ease: 'power2.in',
+        overwrite: 'auto',
+        onUpdate: updateFirePositionFromScale,
+        onComplete: () => {
+          fireAnimation.visible = false;
+          // reset so next time we start from proper base
+          fireAnimation.scale.y = baseScaleY;
+          updateFirePositionFromScale();
+        },
+      });
+
+      gsap.to(fireAnimation.material, {
+        opacity: 0,
+        duration: 0.3,
+        ease: 'power2.in',
+        overwrite: 'auto',
+      });
+
+      // 🔥 shrink flame down into the candle
+
+      gsap.to(fireLight, {
+        intensity: 0,
+        duration: 0.4,
+        ease: 'power2.in',
+        overwrite: 'auto',
+        onComplete: () => {
+          fireLight.visible = false;
+        },
+      });
+    },
+
+    toggleFire: () => {
+      console.log('Table');
+      if (isFireOn) {
+        actions.switchOff();
+      } else {
+        actions.switchOn();
+      }
+    },
+  };
+
+  group.userData.toggleFire = actions.toggleFire;
+  group.name = 'table';
 
   return group;
 };

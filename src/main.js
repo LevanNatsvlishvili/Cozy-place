@@ -51,7 +51,7 @@ scene.add(walls);
 const hearthModel = await hearth(); // 1.9mb
 // const catModel = await cat(); // 1.9mb
 // const sofaModel = await sofa(); // 1.7mb
-// const tableModel = await table(); // 2.3mb
+const tableModel = await table(); // 2.3mb
 // const shelfModel = await shelf(); // 3.4mb
 // const windowModel = await windowFrame(); // 3mb
 // const tvStationModel = await tvStation();
@@ -59,17 +59,21 @@ const hearthModel = await hearth(); // 1.9mb
 scene.add(hearthModel); // 600 ms
 // scene.add(catModel);
 // scene.add(sofaModel); // 500ms
-// scene.add(tableModel); // 500
+scene.add(tableModel); // 500
 // scene.add(shelfModel); // 2300ms
 // scene.add(windowModel); // 500
 // scene.add(tvStationModel);
 // scene.add(bulbModel);
 
 // const tv = tvStationModel.children.find((child) => child.name === 'TV');
+// const candle = tableModel.children.find((child) => child.name === 'table-candle-fire');
+// candle.userData.toggleFire = tableModel.userData.toggleFire;
 // bulbModel.userData.ambientLight = ambientLight;
 // clickableObjects.push(bulbModel);
 // clickableObjects.push(tv);
 clickableObjects.push(hearthModel);
+// clickableObjects.push(candle);
+clickableObjects.push(tableModel);
 // clickableObjects.push(tvStationModel);
 
 const onClickHandler = onClick(renderer, camera, clickableObjects);
