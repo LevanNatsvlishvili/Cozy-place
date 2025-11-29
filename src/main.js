@@ -95,7 +95,7 @@ window.addEventListener('pointerdown', () => {
 });
 
 // To do
-
+// Should sounds be remain ? perforamnce impact ?
 // Add loading screen while models are being loaded
 // Jagged edges, on window frame, and potentially other models
 // Give background a very subtle texture to avoid pure black
