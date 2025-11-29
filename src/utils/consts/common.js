@@ -32,5 +32,17 @@ export const colors = {
 
 export const shadow = {
   mapSize: { width: 1024, height: 1024 },
-  // camera: { near: 0.5, far: 500, fov: 30 },
+};
+
+export const mediaLength = {
+  thunder: {
+    bigThunder: 9000,
+    smallThunder: 5000,
+  },
+  lightning: {
+    length: 26000,
+    pause: 60000,
+    bigLightning: 9000,
+    smallLightning: 5000,
+  },
 };

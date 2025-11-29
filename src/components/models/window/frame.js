@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import gltfLoader from '@/utils/loader/gtlfLoader';
 import gui from '@/utils/gui';
 import loadVideo from '@/utils/loader/videoLoader';
+import { mediaLength } from '@/utils/consts/common';
 // import gui from '@/utils/gui';
 
 const frame = async () => {
@@ -27,9 +28,19 @@ const frame = async () => {
   group.add(windowModel);
 
   // Lightning
-  const video = await loadVideo('/lightning_3.mp4');
-  video.play();
+  const video = await loadVideo('/lightning_3.mp4', false);
   video.playbackRate = 0.8;
+  video.play();
+  // Console log time with seconds when video starts
+  const time = new Date();
+  console.log('Lightning video started at:', time.getHours() + ':' + time.getMinutes() + ':' + time.getSeconds());
+
+  video.addEventListener('ended', () => {
+    video.currentTime = 0;
+    setTimeout(() => {
+      video.play();
+    }, mediaLength.lightning.pause); // pause before replaying
+  });
 
   const lightningTexture = new THREE.VideoTexture(video);
   lightningTexture.encoding = THREE.sRGBEncoding;
@@ -49,7 +60,7 @@ const frame = async () => {
   const canvas = document.createElement('canvas');
   canvas.width = 32;
   canvas.height = 18;
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d', { willReadFrequently: true });
 
   lightningAnimation.userData.brightnessCanvas = canvas;
   lightningAnimation.userData.brightnessCtx = ctx;
@@ -57,8 +68,7 @@ const frame = async () => {
 
   // Opacity
   lightningAnimation.material.transparent = true;
-  // lightningAnimation.material.opacity = 0.4;
-  lightningMaterial.color.setScalar(0.25); // 0 = black, 1 = normal
+  lightningMaterial.color.setScalar(0.1); // 0 = black, 1 = normal
 
   // gui.add(lightningAnimation.material.color, 'r').min(0).max(1).step(0.001).name('lightning brightness');
   gui.add(lightningAnimation.material, 'opacity').min(0).max(1).step(0.01).name('lightning opacity');

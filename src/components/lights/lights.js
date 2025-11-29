@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import gui from '@/utils/gui.js';
-import { colors, shadow } from '../base/consts/common';
+import { colors, shadow } from '../../utils/consts/common';
 
 // Ambient light
 export const ambientLight = new THREE.AmbientLight(colors.light, 10);

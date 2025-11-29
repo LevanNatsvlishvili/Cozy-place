@@ -2,7 +2,7 @@ import gltfLoader from '@/utils/loader/gtlfLoader';
 import gui from '@/utils/gui';
 import * as THREE from 'three';
 import loadVideo from '@/utils/loader/videoLoader';
-import { shadow } from '../base/consts/common';
+import { shadow } from '../../utils/consts/common';
 import { gsap } from 'gsap';
 
 const props = {

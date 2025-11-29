@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { floorCoordinates } from './consts/common.js';
+import { floorCoordinates } from '../../utils/consts/common.js';
 import textureLoader from '@/utils/loader/textureLoader.js';
 
 const floorColorTexture = textureLoader.load('./textures/wood_planks_grey/diff_1k.jpg');

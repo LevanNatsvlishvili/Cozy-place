@@ -1,5 +1,5 @@
 import gltfLoader from '@/utils/loader/gtlfLoader';
-import { floorCoordinates, wallCoordinates } from '../base/consts/common';
+import { floorCoordinates, wallCoordinates } from '../../utils/consts/common';
 import gui from '@/utils/gui';
 import * as THREE from 'three';
 

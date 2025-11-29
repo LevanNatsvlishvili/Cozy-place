@@ -19,12 +19,17 @@ import updateLightningFromVideo from './utils/animations/lightningAnimation';
 
 import Stats from 'stats.js';
 import onClick, { pointerdownHandler, pointerupHandler } from './utils/catchClickOnObjectHandler';
+import sounds from './components/sounds';
 // import onClick from './utils/onClick';
 
 /**
  * Base
  */
 // Debug
+
+// Sound
+// camera.add(sound);
+
 const clickableObjects = [];
 
 const stats = new Stats();
@@ -49,43 +54,49 @@ scene.add(walls);
 
 // Models
 const hearthModel = await hearth(); // 1.9mb
-// const catModel = await cat(); // 1.9mb
-// const sofaModel = await sofa(); // 1.7mb
+const catModel = await cat(); // 1.9mb
+const sofaModel = await sofa(); // 1.7mb
 const tableModel = await table(); // 2.3mb
-// const shelfModel = await shelf(); // 3.4mb
-// const windowModel = await windowFrame(); // 3mb
-// const tvStationModel = await tvStation();
-// const bulbModel = await bulb();
+const shelfModel = await shelf(); // 3.4mb
+const windowModel = await windowFrame(); // 3mb
+const tvStationModel = await tvStation();
+const bulbModel = await bulb();
 scene.add(hearthModel); // 600 ms
-// scene.add(catModel);
-// scene.add(sofaModel); // 500ms
+scene.add(catModel);
+scene.add(sofaModel); // 500ms
 scene.add(tableModel); // 500
-// scene.add(shelfModel); // 2300ms
-// scene.add(windowModel); // 500
-// scene.add(tvStationModel);
-// scene.add(bulbModel);
+scene.add(shelfModel); // 2300ms
+scene.add(windowModel); // 500
+scene.add(tvStationModel);
+scene.add(bulbModel);
+
+// Sounds
+await sounds(); // 1.2mb
+// await fireplace(); // 600kb
 
 // const tv = tvStationModel.children.find((child) => child.name === 'TV');
-// const candle = tableModel.children.find((child) => child.name === 'table-candle-fire');
-// candle.userData.toggleFire = tableModel.userData.toggleFire;
 // bulbModel.userData.ambientLight = ambientLight;
 // clickableObjects.push(bulbModel);
 // clickableObjects.push(tv);
-clickableObjects.push(hearthModel);
-// clickableObjects.push(candle);
-clickableObjects.push(tableModel);
+// clickableObjects.push(hearthModel);
+// // clickableObjects.push(candle);
+// clickableObjects.push(tableModel);
 // clickableObjects.push(tvStationModel);
 
 const onClickHandler = onClick(renderer, camera, clickableObjects);
 window.addEventListener('pointerdown', pointerdownHandler);
 window.addEventListener('pointerup', (e) => pointerupHandler(e, onClickHandler));
 
-// // To do
+window.addEventListener('pointerdown', () => {
+  const ctx = THREE.AudioContext.getContext();
+  if (ctx.state === 'suspended') {
+    ctx.resume();
+  }
+});
 
-// Candle on table turn on/off
-// Add more ambient sounds (rain, fireplace, occasional thunder)
+// To do
+
 // Add loading screen while models are being loaded
-// Lets change animation with GSAP, if possible linkedin page will reshare it.
 // Jagged edges, on window frame, and potentially other models
 // Give background a very subtle texture to avoid pure black
 // Test with low end device, like Lika or phone
@@ -127,19 +138,18 @@ const tick = (now) => {
 
   const t = clock.getElapsedTime(); // seconds since start
 
-  // if (now - lastLowTime >= lowFrameDuration) {
-  //   if (catModel) {
-  //     lastLowTime = now;
-  //     catBreathing(catModel, t);
-  //   }
-  //   if (hearthModel) {
-  //     hearthFlickering(hearthModel.userData.fireSpot, t);
-  //   }
-  // }
-
-  // if (windowModel) {
-  //   updateLightningFromVideo(windowModel.userData.lightningLight, lightningAmbientLight);
-  // }
+  if (now - lastLowTime >= lowFrameDuration) {
+    // if (catModel) {
+    //   lastLowTime = now;
+    //   catBreathing(catModel, t);
+    // }
+    // if (hearthModel) {
+    //   hearthFlickering(hearthModel.userData.fireSpot, t);
+    // }
+    if (windowModel) {
+      updateLightningFromVideo(windowModel.userData.lightningLight, lightningAmbientLight);
+    }
+  }
 
   const info = renderer.info;
   perf.calls = info.render.calls;

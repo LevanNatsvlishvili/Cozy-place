@@ -1,11 +1,11 @@
 import loadingManager from './loadingManager';
 
-export async function loadVideo(url) {
+export async function loadVideo(url, loop = true) {
   loadingManager.itemStart(url);
 
   const video = document.createElement('video');
   video.src = url;
-  video.loop = true;
+  video.loop = loop;
   video.muted = true;
   video.playsInline = true;
 
