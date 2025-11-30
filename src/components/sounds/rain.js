@@ -9,7 +9,6 @@ const rain = () => {
       rainSound.setBuffer(buffer);
       rainSound.setLoop(true);
       rainSound.setVolume(0.2);
-      rainSound.play();
 
       resolve(rainSound);
     });

@@ -8,14 +8,15 @@
     <link href="./src/style.css" rel="stylesheet" />
   </head>
   <body>
-    <div id="loading-screen">
+    <div class="loading-screen">
       <img src="./public/loading.png" alt="Loading image" class="loading-image" />
-      <div class="loader-wrapper">
+      <div class="loader">
         <div class="loader-track"></div>
         <div class="loader-fill"></div>
       </div>
+      <button class="btn" id="start-button">Start</button>
     </div>
-    <!-- <canvas class="webgl"></canvas> -->
+    <canvas class="webgl"></canvas>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

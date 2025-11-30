@@ -20,17 +20,13 @@ import updateLightningFromVideo from './utils/animations/lightningAnimation';
 import Stats from 'stats.js';
 import onClick, { pointerdownHandler, pointerupHandler } from './utils/catchClickOnObjectHandler';
 import sounds from './components/sounds';
+import startSounds from './components/sounds/startSounds';
+import preloadSounds from './components/sounds';
+import { onStartClick, startButtonEl, loaderScreenEl, loaderFillEl } from './utils/eventHandlers/loadingScreenHandler';
 // import onClick from './utils/onClick';
 
-/**
- * Base
- */
-// Debug
-
-// Sound
-// camera.add(sound);
-
 const clickableObjects = [];
+let isSceneStarted = false;
 
 const stats = new Stats();
 stats.showPanel(0); // FPS
@@ -70,8 +66,6 @@ scene.add(windowModel); // 500
 scene.add(tvStationModel);
 scene.add(bulbModel);
 
-// Sounds
-await sounds(); // 1.2mb
 // await fireplace(); // 600kb
 
 // const tv = tvStationModel.children.find((child) => child.name === 'TV');
@@ -94,13 +88,8 @@ window.addEventListener('pointerdown', () => {
   }
 });
 
-// To do
-// Should sounds be remain ? perforamnce impact ?
-// Add loading screen while models are being loaded
-// Jagged edges, on window frame, and potentially other models
-// Give background a very subtle texture to avoid pure black
-// Test with low end device, like Lika or phone
-// Record a video
+// Sounds
+const soundData = await preloadSounds(); // 1.2mb
 
 /**
  * Animate
@@ -116,6 +105,7 @@ const lowFrameDuration = 1000 / lowFPS; // ~33.33ms
 let lastLowTime = 0;
 
 const tick = (now) => {
+  console.log('scene started');
   // Schedule next frame first
   window.requestAnimationFrame(tick);
 
@@ -163,5 +153,32 @@ const tick = (now) => {
   stats.end();
 };
 
-// start loop
+// const startButtonEl = document.querySelector('#start-button');
+
+loaderFillEl.addEventListener('transitionend', (e) => {
+  if (e.propertyName === 'width') {
+    const width = parseFloat(getComputedStyle(loaderFillEl).width);
+    const maxWidth = loaderFillEl.parentElement.clientWidth;
+
+    if (width >= maxWidth) {
+      window.requestAnimationFrame(tick);
+    }
+  }
+});
+
+startButtonEl.addEventListener('click', () => {
+  startSounds(soundData);
+  loaderScreenEl.style.display = 'none';
+});
+
 window.requestAnimationFrame(tick);
+
+// To do
+// Thunder sounds need to be turned on, and fix immediate call when start button is clicked
+// Videos run immediately as well, need to sync with thunder sounds
+// Should sounds be remain ? perforamnce impact ?
+// Add loading screen while models are being loaded
+// Jagged edges, on window frame, and potentially other models
+// Give background a very subtle texture to avoid pure black
+// Test with low end device, like Lika or phone
+// Record a video
