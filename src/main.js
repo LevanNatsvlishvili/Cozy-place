@@ -13,20 +13,16 @@ import tvStation from './components/models/tvStation';
 import cat from './components/models/cat';
 import bulb from './components/models/bulb';
 import catBreathing from './utils/animations/catBreathing';
-import candleFlickering from './utils/animations/candleFlickering';
 import hearthFlickering from './utils/animations/hearthFlickering';
 import updateLightningFromVideo from './utils/animations/lightningAnimation';
 
 import Stats from 'stats.js';
 import onClick, { pointerdownHandler, pointerupHandler } from './utils/catchClickOnObjectHandler';
-import sounds from './components/sounds';
 import startSounds from './components/sounds/startSounds';
 import preloadSounds from './components/sounds';
-import { onStartClick, startButtonEl, loaderScreenEl, loaderFillEl } from './utils/eventHandlers/loadingScreenHandler';
-// import onClick from './utils/onClick';
+import { startButtonEl, loaderScreenEl, loaderFillEl } from './utils/eventHandlers/loadingScreenHandler';
 
 const clickableObjects = [];
-let isSceneStarted = false;
 
 const stats = new Stats();
 stats.showPanel(0); // FPS
@@ -66,16 +62,14 @@ scene.add(windowModel); // 500
 scene.add(tvStationModel);
 scene.add(bulbModel);
 
-// await fireplace(); // 600kb
-
-// const tv = tvStationModel.children.find((child) => child.name === 'TV');
-// bulbModel.userData.ambientLight = ambientLight;
-// clickableObjects.push(bulbModel);
-// clickableObjects.push(tv);
-// clickableObjects.push(hearthModel);
-// // clickableObjects.push(candle);
-// clickableObjects.push(tableModel);
-// clickableObjects.push(tvStationModel);
+// Interactive objects
+const tv = tvStationModel.children.find((child) => child.name === 'TV');
+bulbModel.userData.ambientLight = ambientLight;
+clickableObjects.push(bulbModel);
+clickableObjects.push(tv);
+clickableObjects.push(hearthModel);
+clickableObjects.push(tableModel);
+clickableObjects.push(tvStationModel);
 
 const onClickHandler = onClick(renderer, camera, clickableObjects);
 window.addEventListener('pointerdown', pointerdownHandler);
@@ -105,8 +99,6 @@ const lowFrameDuration = 1000 / lowFPS; // ~33.33ms
 let lastLowTime = 0;
 
 const tick = (now) => {
-  console.log('scene started');
-  // Schedule next frame first
   window.requestAnimationFrame(tick);
 
   // First frame init
@@ -129,13 +121,13 @@ const tick = (now) => {
   const t = clock.getElapsedTime(); // seconds since start
 
   if (now - lastLowTime >= lowFrameDuration) {
-    // if (catModel) {
-    //   lastLowTime = now;
-    //   catBreathing(catModel, t);
-    // }
-    // if (hearthModel) {
-    //   hearthFlickering(hearthModel.userData.fireSpot, t);
-    // }
+    if (catModel) {
+      lastLowTime = now;
+      catBreathing(catModel, t);
+    }
+    if (hearthModel) {
+      hearthFlickering(hearthModel.userData.fireSpot, t);
+    }
     if (windowModel) {
       updateLightningFromVideo(windowModel.userData.lightningLight, lightningAmbientLight);
     }
