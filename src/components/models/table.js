@@ -23,7 +23,7 @@ const table = async () => {
       child.castShadow = true;
       child.receiveShadow = true;
       if (child.material.map) {
-        child.material.map.encoding = THREE.sRGBEncoding;
+        child.material.map.encoding = THREE.SRGBColorSpace;
       }
     }
     if (child.isMesh && child.material) {
@@ -67,7 +67,7 @@ const table = async () => {
   video.playbackRate = 1;
 
   const fireTexture = new THREE.VideoTexture(video);
-  fireTexture.encoding = THREE.sRGBEncoding;
+  fireTexture.encoding = THREE.SRGBColorSpace;
 
   const fireMaterial = new THREE.MeshBasicMaterial({
     map: fireTexture,

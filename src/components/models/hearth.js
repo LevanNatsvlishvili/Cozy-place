@@ -79,7 +79,7 @@ const hearth = async () => {
   video.playbackRate = 0.65;
 
   const fireTexture = new THREE.VideoTexture(video);
-  fireTexture.encoding = THREE.sRGBEncoding;
+  fireTexture.encoding = THREE.SRGBColorSpace;
 
   const fireMaterial = new THREE.MeshBasicMaterial({
     map: fireTexture,

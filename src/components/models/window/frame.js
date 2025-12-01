@@ -43,7 +43,7 @@ const frame = async () => {
   });
 
   const lightningTexture = new THREE.VideoTexture(video);
-  lightningTexture.encoding = THREE.sRGBEncoding;
+  lightningTexture.encoding = THREE.SRGBColorSpace;
 
   const lightningMaterial = new THREE.MeshBasicMaterial({
     map: lightningTexture,
