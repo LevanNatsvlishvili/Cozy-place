@@ -9,27 +9,27 @@ import bulb from '@/components/models/bulb';
 import preloadSounds from '@/components/sounds';
 
 async function loadModels() {
-  const hearthModel = await hearth(); // 1.9mb
+  // const hearthModel = await hearth(); // 1.9mb
   const catModel = await cat(); // 1.9mb
   const sofaModel = await sofa(); // 1.7mb
   const tableModel = await table(); // 2.3mb
-  const shelfModel = await shelf(); // 3.4mb
-  const windowModel = await windowFrame(); // 3mb
-  const tvStationModel = await tvStation();
+  // const shelfModel = await shelf(); // 3.4mb
+  // const windowModel = await windowFrame(); // 3mb
+  // const tvStationModel = await tvStation();
   const bulbModel = await bulb();
   // Sounds
-  const soundData = await preloadSounds(); // 1.2mb
+  // const soundData = await preloadSounds(); // 1.2mb
 
   return {
-    hearthModel,
+    // hearthModel,
     catModel,
     sofaModel,
     tableModel,
-    shelfModel,
-    windowModel,
-    tvStationModel,
+    // shelfModel,
+    // windowModel,
+    // tvStationModel,
     bulbModel,
-    soundData,
+    // soundData,
   };
 }
 
