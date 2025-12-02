@@ -30,10 +30,8 @@ const frame = async () => {
   // Lightning
   const video = await loadVideo('/lightning_3.mp4', false);
   video.playbackRate = 0.8;
-  video.play();
+  // video.play();
   // Console log time with seconds when video starts
-  const time = new Date();
-  console.log('Lightning video started at:', time.getHours() + ':' + time.getMinutes() + ':' + time.getSeconds());
 
   video.addEventListener('ended', () => {
     video.currentTime = 0;
@@ -49,7 +47,10 @@ const frame = async () => {
     map: lightningTexture,
   });
 
-  const lightningAnimation = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), lightningMaterial);
+  const lightningAnimation = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 1),
+    lightningMaterial
+  );
   lightningAnimation.position.x = -3.05;
   lightningAnimation.position.y = 3.4;
   lightningAnimation.position.z = 0.1;
@@ -71,10 +72,10 @@ const frame = async () => {
   lightningMaterial.color.setScalar(0.1); // 0 = black, 1 = normal
 
   // gui.add(lightningAnimation.material.color, 'r').min(0).max(1).step(0.001).name('lightning brightness');
-  gui.add(lightningAnimation.material, 'opacity').min(0).max(1).step(0.01).name('lightning opacity');
 
   group.add(lightningAnimation);
   group.userData.lightningLight = lightningAnimation;
+  group.userData.lightningVideo = video;
 
   return group;
 };

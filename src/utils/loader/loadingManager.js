@@ -1,5 +1,9 @@
 import * as THREE from 'three';
-import { loaderEl, loaderFillEl, startButtonEl } from '../eventHandlers/loadingScreenHandler';
+import {
+  loaderEl,
+  loaderFillEl,
+  startButtonEl,
+} from '../eventHandlers/loadingScreenHandler';
 
 function onVariableUpdate(newValue) {
   percentage = newValue;
@@ -18,7 +22,7 @@ function onVariableUpdate(newValue) {
       // loaderEl.style.display = 'none';
       // startButtonEl.style.display = 'block';
     }
-  }, 1500); // if no update in 0.5 sec → alert
+  }, 4000); // if no update in 0.5 sec → alert
 }
 
 // Elements

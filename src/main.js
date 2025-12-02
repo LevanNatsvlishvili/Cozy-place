@@ -12,7 +12,7 @@ import catBreathing from './utils/animations/catBreathing';
 import hearthFlickering from './utils/animations/hearthFlickering';
 import updateLightningFromVideo from './utils/animations/lightningAnimation';
 
-import Stats from 'stats.js';
+// import Stats from 'stats.js';
 import onClick, {
   pointerdownHandler,
   pointerupHandler,
@@ -28,9 +28,9 @@ import loadModels from './components';
 async function init() {
   const clickableObjects = [];
 
-  const stats = new Stats();
-  stats.showPanel(0); // FPS
-  document.body.appendChild(stats.dom);
+  // const stats = new Stats();
+  // stats.showPanel(0); // FPS
+  // document.body.appendChild(stats.dom);
 
   // Scene
   // Lights
@@ -127,7 +127,7 @@ async function init() {
     // Keep leftover time (smoother pacing)
     lastTime = now - (delta % frameDuration);
 
-    stats.begin();
+    // stats.begin();
 
     const t = clock.getElapsedTime(); // seconds since start
 
@@ -156,7 +156,7 @@ async function init() {
     controls.update();
     renderer.render(scene, camera);
 
-    stats.end();
+    // stats.end();
   };
   window.requestAnimationFrame(tick);
 
@@ -173,6 +173,7 @@ async function init() {
 
   startButtonEl.addEventListener('click', () => {
     startSounds(soundData);
+    windowModel.userData.lightningVideo.play();
     // Add lightning play
     loaderScreenEl.style.display = 'none';
   });
