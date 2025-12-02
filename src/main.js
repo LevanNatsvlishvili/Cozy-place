@@ -172,6 +172,7 @@ async function init() {
 
   startButtonEl.addEventListener('click', () => {
     startSounds(soundData);
+    // Add lightning play
     loaderScreenEl.style.display = 'none';
   });
 }
@@ -181,6 +182,8 @@ init().catch((err) => {
     err
   );
 });
+window.requestAnimationFrame(tick);
+
 // To do
 // Thunder sounds need to be turned on, and fix immediate call when start button is clicked
 // Videos run immediately as well, need to sync with thunder sounds
