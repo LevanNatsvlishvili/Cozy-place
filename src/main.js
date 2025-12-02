@@ -54,30 +54,30 @@ async function init() {
     catModel,
     sofaModel,
     tableModel,
-    // shelfModel,
-    // windowModel,
-    // tvStationModel,
+    shelfModel,
+    windowModel,
+    tvStationModel,
     bulbModel,
-    // soundData,
+    soundData,
   } = await loadModels();
 
   scene.add(hearthModel); // 600 ms
   scene.add(catModel);
   scene.add(sofaModel); // 500ms
   scene.add(tableModel); // 500
-  // scene.add(shelfModel); // 2300ms
-  // scene.add(windowModel); // 500
-  // scene.add(tvStationModel);
+  scene.add(shelfModel); // 2300ms
+  scene.add(windowModel); // 500
+  scene.add(tvStationModel);
   scene.add(bulbModel);
 
   // Interactive objects
-  // const tv = tvStationModel.children.find((child) => child.name === 'TV');
+  const tv = tvStationModel.children.find((child) => child.name === 'TV');
   bulbModel.userData.ambientLight = ambientLight;
   clickableObjects.push(bulbModel);
-  // clickableObjects.push(tv);
+  clickableObjects.push(tv);
   clickableObjects.push(hearthModel);
   clickableObjects.push(tableModel);
-  // clickableObjects.push(tvStationModel);
+  clickableObjects.push(tvStationModel);
 
   const onClickHandler = onClick(renderer, camera, clickableObjects);
   window.addEventListener('pointerdown', pointerdownHandler);
@@ -91,6 +91,9 @@ async function init() {
       ctx.resume();
     }
   });
+
+  // // Sounds
+  // const soundData = await preloadSounds(); // 1.2mb
 
   /**
    * Animate
@@ -106,6 +109,7 @@ async function init() {
   let lastLowTime = 0;
 
   const tick = (now) => {
+    console.log('Ticking started');
     window.requestAnimationFrame(tick);
 
     // First frame init
@@ -135,12 +139,12 @@ async function init() {
       if (hearthModel) {
         hearthFlickering(hearthModel.userData.fireSpot, t);
       }
-      // if (windowModel) {
-      //   updateLightningFromVideo(
-      //     windowModel.userData.lightningLight,
-      //     lightningAmbientLight
-      //   );
-      // }
+      if (windowModel) {
+        updateLightningFromVideo(
+          windowModel.userData.lightningLight,
+          lightningAmbientLight
+        );
+      }
     }
 
     const info = renderer.info;
@@ -162,13 +166,12 @@ async function init() {
 
       if (width >= maxWidth) {
         window.requestAnimationFrame(tick);
-        loaderScreenEl.style.display = 'none';
       }
     }
   });
 
   startButtonEl.addEventListener('click', () => {
-    // startSounds(soundData);
+    startSounds(soundData);
     loaderScreenEl.style.display = 'none';
   });
 }
