@@ -158,6 +158,7 @@ async function init() {
 
     stats.end();
   };
+  window.requestAnimationFrame(tick);
 
   loaderFillEl.addEventListener('transitionend', (e) => {
     if (e.propertyName === 'width') {
@@ -182,7 +183,6 @@ init().catch((err) => {
     err
   );
 });
-window.requestAnimationFrame(tick);
 
 // To do
 // Thunder sounds need to be turned on, and fix immediate call when start button is clicked
