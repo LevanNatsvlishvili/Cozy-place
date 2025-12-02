@@ -3,6 +3,7 @@ import {
   loaderEl,
   loaderFillEl,
   startButtonEl,
+  btnContainer,
 } from '../eventHandlers/loadingScreenHandler';
 
 function onVariableUpdate(newValue) {
@@ -19,8 +20,8 @@ function onVariableUpdate(newValue) {
       if (loaderFillEl) {
         loaderFillEl.style.width = '100%';
       }
-      // loaderEl.style.display = 'none';
-      // startButtonEl.style.display = 'block';
+      loaderEl.style.display = 'none';
+      btnContainer.style.display = 'flex';
     }
   }, 4000); // if no update in 0.5 sec → alert
 }
@@ -56,7 +57,7 @@ loadingManager.onProgress = (url, loaded, total) => {
   if (Number(percentage) === 100) {
     setTimeout(() => {
       loaderEl.style.display = 'none';
-      startButtonEl.style.display = 'block';
+      btnContainer.style.display = 'flex';
     }, 100);
   }
   // console.log(`📦 Loaded (${percentage}%): ${url}\n`);

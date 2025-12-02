@@ -22,8 +22,10 @@ import {
   startButtonEl,
   loaderScreenEl,
   loaderFillEl,
+  turnOffSoundButtonEl,
 } from './utils/eventHandlers/loadingScreenHandler';
 import loadModels from './components';
+import { listener } from './utils/loader/audioLoader';
 
 async function init() {
   const clickableObjects = [];
@@ -43,6 +45,9 @@ async function init() {
 
   // Resizes window every time the window size changes
   windowResizer(camera, renderer);
+
+  // Sound listener
+  camera.add(listener);
 
   // Base
   scene.add(floor);
@@ -109,7 +114,7 @@ async function init() {
   let lastLowTime = 0;
 
   const tick = (now) => {
-    console.log('Ticking started');
+    // console.log('Ticking started');
     window.requestAnimationFrame(tick);
 
     // First frame init
@@ -172,6 +177,12 @@ async function init() {
   });
 
   startButtonEl.addEventListener('click', () => {
+    const isMuted = turnOffSoundButtonEl.style.display !== 'none';
+    console.log(turnOffSoundButtonEl.style);
+    if (isMuted) {
+      listener.setMasterVolume(0);
+    }
+
     startSounds(soundData);
     windowModel.userData.lightningVideo.play();
     // Add lightning play
@@ -186,11 +197,8 @@ init().catch((err) => {
 });
 
 // To do
-// Thunder sounds need to be turned on, and fix immediate call when start button is clicked
-// Videos run immediately as well, need to sync with thunder sounds
-// Should sounds be remain ? perforamnce impact ?
-// Add loading screen while models are being loaded
-// Jagged edges, on window frame, and potentially other models
+// Add sound on/off
+// Add camera restirctions to not go off the room
 // Give background a very subtle texture to avoid pure black
 // Test with low end device, like Lika or phone
 // Record a video

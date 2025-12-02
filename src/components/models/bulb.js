@@ -23,6 +23,14 @@ const bulb = async () => {
       defaultBulbSettings.metalness = child.material.metalness;
       defaultBulbSettings.transparent = child.material.transparent;
       defaultBulbSettings.opacity = child.material.opacity;
+      child.material.color.setHex(0x2f3a3b);
+      child.material.emissive.set('#ffd27f');
+      child.material.emissiveIntensity = 2;
+      child.material.roughness = 0.1;
+      child.material.metalness = 0;
+      child.material.transparent = true;
+      child.material.opacity = 0.6;
+      child.material.needsUpdate = true;
     }
   });
 
@@ -35,7 +43,7 @@ const bulb = async () => {
   const bulbLight = new THREE.PointLight('#ffd27f', 30, 12, 1.2);
   bulbLight.position.z = floorCoordinates.length / 2;
   bulbLight.position.y = wallCoordinates.height - 1.5;
-  bulbLight.visible = false;
+  bulbLight.visible = true;
 
   const actions = {
     switchLightOn: () => {
@@ -58,7 +66,8 @@ const bulb = async () => {
         if (child.isMesh && child.name === 'Bulb-glass') {
           child.material.color.setHex(defaultBulbSettings.color);
           child.material.emissive.setHex(defaultBulbSettings.emissive);
-          child.material.emissiveIntensity = defaultBulbSettings.emissiveIntensity;
+          child.material.emissiveIntensity =
+            defaultBulbSettings.emissiveIntensity;
           child.material.roughness = defaultBulbSettings.roughness;
           child.material.metalness = defaultBulbSettings.metalness;
           child.material.transparent = defaultBulbSettings.transparent;

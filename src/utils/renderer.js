@@ -6,13 +6,31 @@ export const scene = new THREE.Scene();
 
 export const canvas = document.querySelector('canvas.webgl');
 
-export const camera = new THREE.PerspectiveCamera(30, screenSizes.width / screenSizes.height);
-camera.position.x = 6;
-camera.position.y = 2;
+export const camera = new THREE.PerspectiveCamera(
+  22.5,
+  screenSizes.width / screenSizes.height
+);
+camera.position.x = 0;
+camera.position.y = 6;
 camera.position.z = 28;
-gui.add(camera.position, 'x').min(-50).max(50).step(0.01).name('Camera X Position');
-gui.add(camera.position, 'y').min(-50).max(50).step(0.01).name('Camera Y Position');
-gui.add(camera.position, 'z').min(-50).max(50).step(0.01).name('Camera Z Position');
+gui
+  .add(camera.position, 'x')
+  .min(-50)
+  .max(50)
+  .step(0.01)
+  .name('Camera X Position');
+gui
+  .add(camera.position, 'y')
+  .min(-50)
+  .max(50)
+  .step(0.01)
+  .name('Camera Y Position');
+gui
+  .add(camera.position, 'z')
+  .min(-50)
+  .max(50)
+  .step(0.01)
+  .name('Camera Z Position');
 gui
   .add(camera, 'fov')
   .min(1)

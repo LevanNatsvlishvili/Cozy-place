@@ -60,6 +60,16 @@ body {
   transition: width 0.1s linear;
 }
 
+.btn-container {
+  position: absolute;
+  bottom: 6%;
+  left: 50%;
+  display: flex;
+  transform: translateX(-50%);
+  gap: 8px;
+  display: none;
+}
+
 .btn {
   height: 50px;
   width: 100px;
@@ -68,14 +78,18 @@ body {
   outline: none;
   color: #d89b5a;
   background: white;
-  position: absolute;
-  bottom: 6%;
-  left: 50%;
-  transform: translateX(-50%);
+
   cursor: pointer;
   transition: background 0.2s ease, color 0.2s ease;
-  display: none;
+  /* display: none; */
 }
+.btn.sound {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+}
+
 .btn:hover {
   background: #f0f0f0;
   color: #b57a3a;

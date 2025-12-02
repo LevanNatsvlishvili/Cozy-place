@@ -26,7 +26,9 @@ export function createClickHandler(renderer, camera, clickableObjects) {
   return function onClick(event) {
     if (!renderer || !camera) return;
     // Defensive: ensure we have a proper array of objects
-    const targets = Array.isArray(clickableObjects) ? clickableObjects.filter((obj) => obj && obj.isObject3D) : [];
+    const targets = Array.isArray(clickableObjects)
+      ? clickableObjects.filter((obj) => obj && obj.isObject3D)
+      : [];
     if (targets.length === 0) {
       // Nothing to intersect with yet
       return;
@@ -42,9 +44,9 @@ export function createClickHandler(renderer, camera, clickableObjects) {
 
     if (intersects.length > 0) {
       const clicked = intersects[0].object;
-      const clickedFunc = targets.find((target) => clicked.name.includes(target.name));
-      console.log(clicked);
-      console.log(clickedFunc);
+      const clickedFunc = targets.find((target) =>
+        clicked.name.includes(target.name)
+      );
       handleModelClick(clickedFunc.userData, clicked.name);
     }
   };
