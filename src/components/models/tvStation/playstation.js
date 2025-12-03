@@ -1,4 +1,3 @@
-import gui from '@/utils/gui';
 import gltfLoader from '@/utils/loader/gtlfLoader';
 import * as THREE from 'three';
 
@@ -29,7 +28,9 @@ const props = {
 const playstation = async (position) => {
   const group = new THREE.Group();
   const ps5 = await gltfLoader.loadAsync('./models/tv_station/ps5.glb');
-  const controller = await gltfLoader.loadAsync('./models/tv_station/controller.glb');
+  const controller = await gltfLoader.loadAsync(
+    './models/tv_station/controller.glb'
+  );
 
   // Console
   const consoleModel = ps5.scene;

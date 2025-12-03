@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import walls from './components/base/walls';
 import floor from './components/base/floor';
 import windowResizer from './utils/windowResizer';
-import { camera, renderer, controls, perf, scene } from './utils/renderer.js';
+import { camera, renderer, controls, scene } from './utils/renderer.js';
 import {
   ambientLight,
   directionalLight,
@@ -11,6 +11,7 @@ import {
 import catBreathing from './utils/animations/catBreathing';
 import hearthFlickering from './utils/animations/hearthFlickering';
 import updateLightningFromVideo from './utils/animations/lightningAnimation';
+import addActionListeners from '@/utils/eventHandlers/actionsEventHandler';
 
 // import Stats from 'stats.js';
 import onClick, {
@@ -98,6 +99,16 @@ async function init() {
     }
   });
 
+  const actions = {
+    bulb: bulbModel.userData,
+    tv: tv.userData,
+    hearth: hearthModel.userData,
+    table: tableModel.userData,
+    listener,
+  };
+  // Action listeners
+  addActionListeners(actions);
+
   /**
    * Animate
    */
@@ -112,7 +123,6 @@ async function init() {
   let lastLowTime = 0;
 
   const tick = (now) => {
-    // console.log('Ticking started');
     window.requestAnimationFrame(tick);
 
     // First frame init
@@ -166,12 +176,6 @@ async function init() {
       }
     }
 
-    const info = renderer.info;
-    perf.calls = info.render.calls;
-    perf.triangles = info.render.triangles;
-    perf.geometries = info.memory.geometries;
-    perf.textures = info.memory.textures;
-
     controls.update();
     renderer.render(scene, camera);
 
@@ -192,7 +196,6 @@ async function init() {
 
   startButtonEl.addEventListener('click', () => {
     const isMuted = turnOffSoundButtonEl.style.display !== 'none';
-    console.log(turnOffSoundButtonEl.style);
     if (isMuted) {
       listener.setMasterVolume(0);
     }

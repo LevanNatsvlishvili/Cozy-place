@@ -6,7 +6,6 @@ import {
   floorCoordinates,
 } from '../../utils/consts/common.js';
 import textureLoader from '@/utils/loader/textureLoader.js';
-import gui from '@/utils/gui.js';
 
 // wall
 const wallColorTexture = textureLoader.load('./textures/walls/diff_1k.jpg');
@@ -49,13 +48,6 @@ const wallMaterial = new THREE.MeshStandardMaterial({
 
 wallMaterial.transparent = true;
 wallMaterial.opacity = 1; // to fix some z-fighting issues with floor
-gui.add(wallMaterial, 'transparent').name('Wall Material Transparent');
-gui
-  .add(wallMaterial, 'opacity')
-  .min(0)
-  .max(1)
-  .step(0.01)
-  .name('Wall Material Opacity');
 
 const sideWallGeom = new THREE.BoxGeometry(
   wallCoordinates.width, // along X

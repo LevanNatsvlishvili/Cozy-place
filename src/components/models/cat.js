@@ -1,6 +1,4 @@
-import gui from '@/utils/gui';
 import gltfLoader from '@/utils/loader/gtlfLoader';
-import * as THREE from 'three';
 
 const props = {
   scale: 0.5,
@@ -28,10 +26,6 @@ const cat = async () => {
       child.material.needsUpdate = true;
     }
   });
-
-  // gui.add(cat.position, 'x').min(-10).max(10).step(0.01).name('Cat X Position');
-  // gui.add(cat.position, 'y').min(-10).max(10).step(0.01).name('Cat Y Position');
-  // gui.add(cat.position, 'z').min(-10).max(10).step(0.01).name('Cat Z Position');
 
   cat.userData.originalScale = props.scale;
 

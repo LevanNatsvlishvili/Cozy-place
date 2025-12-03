@@ -9,7 +9,11 @@
   </head>
   <body>
     <div class="loading-screen">
-      <img src="./loading.png" alt="Loading image" class="loading-image" />
+      <img
+        src="./media/loading.png"
+        alt="Loading image"
+        class="loading-image"
+      />
       <div class="loader">
         <div class="loader-track"></div>
         <div class="loader-fill"></div>
@@ -20,19 +24,51 @@
           <img
             style="display: inline"
             id="sound-on"
-            src="/sound-on.svg"
+            src="/media/sound-on.svg"
             alt="Sound on"
           />
           <img
             style="display: none"
             id="sound-off"
-            src="/sound-off.svg"
+            src="/media/sound-off.svg"
             alt="Sound off"
           />
         </button>
       </div>
     </div>
     <div class="canva-wrapper">
+      <div class="scene-actions">
+        <button title="Toggle Sound" class="btn sound" id="action-sound">
+          <img
+            style="display: inline"
+            id="action-sound-on"
+            src="/media/sound-on.svg"
+            alt="Sound on"
+          />
+          <img
+            style="display: none"
+            id="action-sound-off"
+            src="/media/sound-off.svg"
+            alt="Sound off"
+          />
+        </button>
+        <button title="Toggle Bulb" class="btn" id="action-bulb">
+          <img style="display: inline" src="/media/bulb.svg" alt="Bulb" />
+        </button>
+        <button title="Toggle TV" class="btn" id="action-tv">
+          <img style="display: inline" src="/media/tv.svg" alt="TV" />
+        </button>
+        <button title="Toggle Fireplace" class="btn" id="action-fireplace">
+          <img
+            style="display: inline"
+            src="/media/fireplace.svg"
+            alt="Fireplace"
+          />
+        </button>
+        <button title="Toggle candle" class="btn" id="action-candle">
+          <img style="display: inline" src="/media/candle.svg" alt="Candle" />
+        </button>
+      </div>
       <canvas class="webgl"></canvas>
     </div>
     <script type="module" src="/src/main.js"></script>

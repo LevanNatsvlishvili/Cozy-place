@@ -9,7 +9,6 @@ function startSounds(thunderSounds) {
   rain.play();
   // small thunder
   setTimeout(() => {
-    console.log('small played');
     small.play();
   }, mediaLength.thunder.smallThunder);
 
@@ -19,7 +18,6 @@ function startSounds(thunderSounds) {
 
   // big thunder
   setTimeout(() => {
-    console.log('big thunder');
     big.play();
   }, mediaLength.thunder.bigThunder);
 

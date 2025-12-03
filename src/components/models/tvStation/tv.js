@@ -1,8 +1,8 @@
-import gui from '@/utils/gui';
 import gltfLoader from '@/utils/loader/gtlfLoader';
 import textureLoader from '@/utils/loader/textureLoader';
 import * as THREE from 'three';
 import { gsap } from 'gsap';
+import { handleTv } from '@/utils/eventHandlers/actionsEventHandler';
 
 const props = {
   scale: 3,
@@ -58,9 +58,6 @@ const tv = async () => {
   tvLight.intensity = tvLightIntensity;
   tvLight.distance = 5;
   tvLight.decay = 1.4;
-  gui.add(tvLight, 'intensity', 0, 20, 0.1).name('TV Light Intensity');
-  gui.add(tvLight, 'distance', 0, 20, 0.1).name('TV Light Distance');
-  gui.add(tvLight, 'decay', 0, 5, 0.1).name('TV Light Decay');
   // tvLight.visible = true;
 
   group.add(tvLight);
@@ -121,6 +118,7 @@ const tv = async () => {
       });
     },
     toggleTV: () => {
+      handleTv();
       if (tvIsOn) {
         actions.switchOff();
       } else {

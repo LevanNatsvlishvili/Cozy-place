@@ -1,7 +1,7 @@
 import gltfLoader from '@/utils/loader/gtlfLoader';
 import { floorCoordinates, wallCoordinates } from '../../utils/consts/common';
-import gui from '@/utils/gui';
 import * as THREE from 'three';
+import { handleBulb } from '@/utils/eventHandlers/actionsEventHandler';
 
 const props = {
   scale: 0.25,
@@ -78,6 +78,7 @@ const bulb = async () => {
       bulbLight.visible = false;
     },
     toggleBulbLight: (ambientLight) => {
+      handleBulb();
       if (bulbLight.visible) {
         actions.switchLightOff();
         ambientLight.intensity = 0.5;
@@ -87,8 +88,6 @@ const bulb = async () => {
       }
     },
   };
-
-  gui.add(actions, 'toggleBulbLight').name('Toggle Bulb Light ');
 
   // Attach light to the bulb so they move together
   group.add(model);

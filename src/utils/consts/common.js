@@ -50,8 +50,8 @@ export const mediaLength = {
 export const planeBounds = {
   minX: -3,
   maxX: 30,
-  minZ: 0,
+  minZ: 3,
   maxZ: 30,
   minY: 0.2,
-  maxY: 7,
+  maxY: 5.5,
 };

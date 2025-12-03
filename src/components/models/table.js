@@ -1,9 +1,9 @@
 import gltfLoader from '@/utils/loader/gtlfLoader';
-import gui from '@/utils/gui';
 import * as THREE from 'three';
 import loadVideo from '@/utils/loader/videoLoader';
 import { shadow } from '../../utils/consts/common';
 import { gsap } from 'gsap';
+import { handleCandle } from '@/utils/eventHandlers/actionsEventHandler';
 
 const props = {
   scale: 1.5,
@@ -76,7 +76,10 @@ const table = async () => {
     depthWrite: false, // avoids z-fighting glow
   });
 
-  const fireAnimation = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), fireMaterial);
+  const fireAnimation = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 1),
+    fireMaterial
+  );
 
   group.add(fireLight);
   fireAnimation.position.z = props.position.z - 0.05;
@@ -196,7 +199,7 @@ const table = async () => {
     },
 
     toggleFire: () => {
-      console.log('Table');
+      handleCandle();
       if (isFireOn) {
         actions.switchOff();
       } else {

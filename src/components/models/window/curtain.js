@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import gltfLoader from '@/utils/loader/gtlfLoader';
-import gui from '@/utils/gui';
 
 const props = {
   scale: {
@@ -12,7 +11,9 @@ const props = {
 
 const curtain = async () => {
   const curtainGlb = await gltfLoader.loadAsync('./models/curtain/curtain.glb');
-  const curtainRodGlb = await gltfLoader.loadAsync('./models/curtain/curtain_rod.glb');
+  const curtainRodGlb = await gltfLoader.loadAsync(
+    './models/curtain/curtain_rod.glb'
+  );
   const curtainModel = curtainGlb.scene;
   const rodModel = curtainRodGlb.scene;
   curtainModel.position.x = 2;
@@ -49,19 +50,6 @@ const curtain = async () => {
   group.add(curtain2);
   group.add(rod1);
   group.add(rod2);
-
-  // group.add(lightningAnimation);
-  // const windowGroup = createWindowWithLightning();
-  // windowGroup.position.x = 2;
-  // 5;
-  // windowGroup.position.y = 2.5;
-  // windowGroup.position.z = 0.1;
-  // // windowGroup.scale.set(1.5, 1.5, 1.5);
-  // gui.add(windowGroup.position, 'x').min(-10).max(10).step(0.01).name('window X');
-  // gui.add(windowGroup.position, 'y').min(-10).max(10).step(0.01).name('window Y');
-  // gui.add(windowGroup.position, 'z').min(-10).max(10).step(0.01).name('window Z');
-
-  // group.add(windowGroup);
 
   return group;
 };

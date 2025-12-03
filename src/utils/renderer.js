@@ -1,7 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { screenSizes } from './windowResizer';
-import gui from './gui';
 export const scene = new THREE.Scene();
 
 export const canvas = document.querySelector('canvas.webgl');
@@ -13,33 +12,6 @@ export const camera = new THREE.PerspectiveCamera(
 camera.position.x = 0;
 camera.position.y = 6;
 camera.position.z = 28;
-gui
-  .add(camera.position, 'x')
-  .min(-50)
-  .max(50)
-  .step(0.01)
-  .name('Camera X Position');
-gui
-  .add(camera.position, 'y')
-  .min(-50)
-  .max(50)
-  .step(0.01)
-  .name('Camera Y Position');
-gui
-  .add(camera.position, 'z')
-  .min(-50)
-  .max(50)
-  .step(0.01)
-  .name('Camera Z Position');
-gui
-  .add(camera, 'fov')
-  .min(1)
-  .max(100)
-  .step(0.01)
-  .name('Camera FOV')
-  .onChange(() => {
-    camera.updateProjectionMatrix();
-  });
 
 // Controls
 export const controls = new OrbitControls(camera, canvas);
@@ -57,17 +29,3 @@ renderer.setSize(screenSizes.width, screenSizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
-const debugFolder = gui.addFolder('Performance');
-
-export const perf = {
-  calls: 0,
-  triangles: 0,
-  geometries: 0,
-  textures: 0,
-};
-
-debugFolder.add(perf, 'calls').name('Draw Calls').listen();
-debugFolder.add(perf, 'triangles').name('Triangles').listen();
-debugFolder.add(perf, 'geometries').name('Geometries').listen();
-debugFolder.add(perf, 'textures').name('Textures').listen();

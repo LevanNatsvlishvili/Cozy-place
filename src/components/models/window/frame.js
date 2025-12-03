@@ -1,9 +1,7 @@
 import * as THREE from 'three';
 import gltfLoader from '@/utils/loader/gtlfLoader';
-import gui from '@/utils/gui';
 import loadVideo from '@/utils/loader/videoLoader';
 import { mediaLength } from '@/utils/consts/common';
-// import gui from '@/utils/gui';
 
 const frame = async () => {
   const windowGlb = await gltfLoader.loadAsync('./models/window_rain.glb');
@@ -70,8 +68,6 @@ const frame = async () => {
   // Opacity
   lightningAnimation.material.transparent = true;
   lightningMaterial.color.setScalar(0.1); // 0 = black, 1 = normal
-
-  // gui.add(lightningAnimation.material.color, 'r').min(0).max(1).step(0.001).name('lightning brightness');
 
   group.add(lightningAnimation);
   group.userData.lightningLight = lightningAnimation;

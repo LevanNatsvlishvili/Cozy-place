@@ -1,5 +1,3 @@
-import gui from '@/utils/gui';
-import gltfLoader from '@/utils/loader/gtlfLoader';
 import stand from './stand';
 import * as THREE from 'three';
 import playstation from './playstation';

@@ -1,9 +1,9 @@
 import gltfLoader from '@/utils/loader/gtlfLoader';
 import * as THREE from 'three';
 import loadVideo from '@/utils/loader/videoLoader';
-import gui from '@/utils/gui';
 import { shadow } from '../../utils/consts/common';
 import { gsap } from 'gsap';
+import { handleFireplace } from '@/utils/eventHandlers/actionsEventHandler';
 
 const props = {
   scale: {
@@ -37,8 +37,6 @@ const hearth = async () => {
     if (child.isMesh) {
       child.metalness = 0;
       child.roughness = 1.0;
-      gui.add(child.material, 'metalness', 0, 1, 0.01).name('Hearth Metalness');
-      gui.add(child.material, 'roughness', 0, 1, 0.01).name('Hearth Roughness');
     }
   });
   group.add(model);
@@ -181,6 +179,7 @@ const hearth = async () => {
       });
     },
     toggleFire: () => {
+      handleFireplace();
       if (isFireOn) {
         actions.switchOff();
       } else {
@@ -191,7 +190,6 @@ const hearth = async () => {
 
   group.add(fireAnimation);
   group.userData.toggleFire = actions.toggleFire;
-  console.log(group);
   return group;
 };
 

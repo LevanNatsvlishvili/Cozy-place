@@ -5,14 +5,25 @@ const startButtonEl = document.querySelector('#start-button');
 const btnContainer = document.querySelector('.btn-container');
 const turnOnSoundButtonEl = document.querySelector('#sound-on');
 const turnOffSoundButtonEl = document.querySelector('#sound-off');
+import {
+  actionTurnOnSoundButtonEl,
+  actionTurnOffSoundButtonEl,
+  actionSoundButtonEl,
+} from './actionsEventHandler';
 
 turnOffSoundButtonEl.addEventListener('click', () => {
   turnOffSoundButtonEl.style.display = 'none';
   turnOnSoundButtonEl.style.display = 'inline-block';
+  actionSoundButtonEl.classList.remove('off');
+  actionTurnOffSoundButtonEl.style.display = 'none';
+  actionTurnOnSoundButtonEl.style.display = 'inline-block';
 });
 turnOnSoundButtonEl.addEventListener('click', () => {
   turnOnSoundButtonEl.style.display = 'none';
   turnOffSoundButtonEl.style.display = 'inline-block';
+  actionSoundButtonEl.classList.add('off');
+  actionTurnOnSoundButtonEl.style.display = 'none';
+  actionTurnOffSoundButtonEl.style.display = 'inline-block';
 });
 
 export {

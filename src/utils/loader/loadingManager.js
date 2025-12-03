@@ -14,7 +14,6 @@ function onVariableUpdate(newValue) {
 
   stopTimeout = setTimeout(() => {
     if (Number(percentage) !== 100.0) {
-      console.log(percentage);
       percentage = 100.0;
       console.warn('⚠️ Loading seems to be stuck, forcing to 100%');
       if (loaderFillEl) {
@@ -60,8 +59,6 @@ loadingManager.onProgress = (url, loaded, total) => {
       btnContainer.style.display = 'flex';
     }, 100);
   }
-  // console.log(`📦 Loaded (${percentage}%): ${url}\n`);
-  // console.log(`📦 Loaded (${loaded}/${total}): ${url}\n`);
 };
 
 // If loading fails
