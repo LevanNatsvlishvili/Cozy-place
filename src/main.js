@@ -214,8 +214,5 @@ init().catch((err) => {
 });
 
 // To do
-// Add sound on/off in scene.
-// Add camera restirctions to not go off the room
 // Give background a very subtle texture to avoid pure black
-// Test with low end device, like Lika or phone
 // Record a video
