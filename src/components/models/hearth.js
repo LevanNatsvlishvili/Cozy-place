@@ -33,7 +33,14 @@ const hearth = async () => {
   model.position.y = props.position.y;
   model.rotateOnAxis(new THREE.Vector3(0, 1, 0), props.rotation);
   model.scale.set(props.scale.x, props.scale.y, props.scale.z);
-  console.log(model);
+  model.traverse((child) => {
+    if (child.isMesh) {
+      child.metalness = 0;
+      child.roughness = 1.0;
+      gui.add(child.material, 'metalness', 0, 1, 0.01).name('Hearth Metalness');
+      gui.add(child.material, 'roughness', 0, 1, 0.01).name('Hearth Roughness');
+    }
+  });
   group.add(model);
 
   // Firelight inside hearth
@@ -88,7 +95,10 @@ const hearth = async () => {
     depthWrite: false, // avoids z-fighting glow
   });
 
-  const fireAnimation = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), fireMaterial);
+  const fireAnimation = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 1),
+    fireMaterial
+  );
   fireAnimation.position.z = props.position.z;
   fireAnimation.position.x = props.position.x - 0.075;
   fireAnimation.position.y = 1.2;

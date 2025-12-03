@@ -7,13 +7,14 @@ import {
 } from '../../utils/consts/common.js';
 import textureLoader from '@/utils/loader/textureLoader.js';
 import gui from '@/utils/gui.js';
-import floor from './floor.js';
 
 // wall
 const wallColorTexture = textureLoader.load('./textures/walls/diff_1k.jpg');
 const wallARMTexture = textureLoader.load('/textures/walls/arm_1k.jpg');
 const wallNormalTexture = textureLoader.load('./textures/walls/nor_gl_1k.jpg');
-const wallDisplacementTexture = textureLoader.load('./textures/walls/disp_1k.jpg');
+const wallDisplacementTexture = textureLoader.load(
+  './textures/walls/disp_1k.jpg'
+);
 
 wallColorTexture.colorSpace = THREE.SRGBColorSpace;
 
@@ -21,7 +22,12 @@ const repeatX = 1.25;
 const repeatY = 1;
 const rotation = Math.PI * 0.5;
 
-for (const t of [wallColorTexture, wallARMTexture, wallNormalTexture, wallDisplacementTexture]) {
+for (const t of [
+  wallColorTexture,
+  wallARMTexture,
+  wallNormalTexture,
+  wallDisplacementTexture,
+]) {
   t.wrapS = t.wrapT = THREE.RepeatWrapping;
   t.repeat.set(repeatX, repeatY);
   t.center.set(0.5, 0.5);
@@ -44,7 +50,12 @@ const wallMaterial = new THREE.MeshStandardMaterial({
 wallMaterial.transparent = true;
 wallMaterial.opacity = 1; // to fix some z-fighting issues with floor
 gui.add(wallMaterial, 'transparent').name('Wall Material Transparent');
-gui.add(wallMaterial, 'opacity').min(0).max(1).step(0.01).name('Wall Material Opacity');
+gui
+  .add(wallMaterial, 'opacity')
+  .min(0)
+  .max(1)
+  .step(0.01)
+  .name('Wall Material Opacity');
 
 const sideWallGeom = new THREE.BoxGeometry(
   wallCoordinates.width, // along X
@@ -54,7 +65,10 @@ const sideWallGeom = new THREE.BoxGeometry(
   64,
   1 // widthSegments, heightSegments, depthSegments
 );
-sideWallGeom.setAttribute('uv2', new THREE.BufferAttribute(sideWallGeom.attributes.uv.array, 2));
+sideWallGeom.setAttribute(
+  'uv2',
+  new THREE.BufferAttribute(sideWallGeom.attributes.uv.array, 2)
+);
 
 const sideWalls = new THREE.Mesh(sideWallGeom, wallMaterial);
 // Copy side walls to make 2 walls
@@ -95,7 +109,10 @@ const backWallGeom = new THREE.BoxGeometry(
   64,
   1 // widthSegments, heightSegments, depthSegments
 );
-backWallGeom.setAttribute('uv2', new THREE.BufferAttribute(backWallGeom.attributes.uv.array, 2));
+backWallGeom.setAttribute(
+  'uv2',
+  new THREE.BufferAttribute(backWallGeom.attributes.uv.array, 2)
+);
 
 const backWall = new THREE.Mesh(backWallGeom, wallMaterial);
 // backWall.position.z = -backWallCoordinates.z;

@@ -46,3 +46,12 @@ export const mediaLength = {
     smallLightning: 5000,
   },
 };
+
+export const planeBounds = {
+  minX: -3,
+  maxX: 30,
+  minZ: 0,
+  maxZ: 30,
+  minY: 0.2,
+  maxY: 7,
+};

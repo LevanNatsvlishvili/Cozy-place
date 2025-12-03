@@ -56,8 +56,12 @@ const tv = async () => {
   tvLight.position.y = 1.3;
   tvLight.position.z = props.position.z;
   tvLight.intensity = tvLightIntensity;
-  tvLight.distance = 10;
-  tvLight.decay = 0.8;
+  tvLight.distance = 5;
+  tvLight.decay = 1.4;
+  gui.add(tvLight, 'intensity', 0, 20, 0.1).name('TV Light Intensity');
+  gui.add(tvLight, 'distance', 0, 20, 0.1).name('TV Light Distance');
+  gui.add(tvLight, 'decay', 0, 5, 0.1).name('TV Light Decay');
+  // tvLight.visible = true;
 
   group.add(tvLight);
 
