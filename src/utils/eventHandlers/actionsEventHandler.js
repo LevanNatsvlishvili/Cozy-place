@@ -1,3 +1,5 @@
+import { soundVolume } from '../consts/common';
+
 export const actionTurnOnSoundButtonEl =
   document.querySelector('#action-sound-on');
 export const actionTurnOffSoundButtonEl =
@@ -34,7 +36,7 @@ function addActionListeners(actions) {
       actionSoundButtonEl.classList.remove('off');
       actionTurnOffSoundButtonEl.style.display = 'none';
       actionTurnOnSoundButtonEl.style.display = 'inline-block';
-      actions.listener.setMasterVolume(1);
+      actions.listener.setMasterVolume(soundVolume);
       return;
     }
     actionSoundButtonEl.classList.add('off');

@@ -27,7 +27,7 @@ import {
 } from './utils/eventHandlers/loadingScreenHandler';
 import loadModels from './components';
 import { listener } from './utils/loader/audioLoader';
-import { planeBounds } from './utils/consts/common';
+import { planeBounds, soundVolume } from './utils/consts/common';
 
 async function init() {
   const clickableObjects = [];
@@ -50,6 +50,9 @@ async function init() {
 
   // Sound listener
   camera.add(listener);
+
+  // Set volume to listener
+  listener.setMasterVolume(soundVolume);
 
   // Base
   scene.add(floor);

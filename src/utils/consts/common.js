@@ -55,3 +55,5 @@ export const planeBounds = {
   minY: 0.2,
   maxY: 5.5,
 };
+
+export const soundVolume = 0.1;
