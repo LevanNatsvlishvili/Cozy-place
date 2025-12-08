@@ -168,15 +168,17 @@ async function init() {
         lastLowTime = now;
         catBreathing(catModel, t);
       }
-      if (hearthModel) {
-        hearthFlickering(hearthModel.userData.fireSpot, t);
-      }
+
       if (windowModel) {
         updateLightningFromVideo(
           windowModel.userData.lightningLight,
           lightningAmbientLight
         );
       }
+    }
+
+    if (hearthModel) {
+      hearthFlickering(hearthModel.userData.fireSpot, t);
     }
 
     controls.update();

@@ -27,9 +27,17 @@ function updateLightningFromVideo(light, ambientLight) {
   // Map brightness → lightning intensity
   // tweak these to taste
   const minIntensity = 0.0; // almost dark room
-  const maxIntensity = 8.0; // big flash
-  const targetIntensity = THREE.MathUtils.lerp(minIntensity, maxIntensity, normalized);
-  const intensityy = THREE.MathUtils.lerp(ambientLight.intensity, targetIntensity, 0.35);
+  const maxIntensity = 20.0; // big flash
+  const targetIntensity = THREE.MathUtils.lerp(
+    minIntensity,
+    maxIntensity,
+    normalized
+  );
+  const intensityy = THREE.MathUtils.lerp(
+    ambientLight.intensity,
+    targetIntensity,
+    0.35
+  );
   ambientLight.intensity = intensityy;
 }
 
